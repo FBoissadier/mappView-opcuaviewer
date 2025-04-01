@@ -89,6 +89,7 @@
 			<xs:enumeration value="EnableChanged"></xs:enumeration>
 			<xs:enumeration value="FocusIn"></xs:enumeration>
 			<xs:enumeration value="FocusOut"></xs:enumeration>
+			<xs:enumeration value="NodeClicked"></xs:enumeration>
 			<xs:enumeration value="VisibleChanged"></xs:enumeration>
 		</xs:restriction>
 	</xs:simpleType>

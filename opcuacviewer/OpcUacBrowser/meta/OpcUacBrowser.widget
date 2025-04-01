@@ -128,6 +128,23 @@
 			<Event name="FocusOut">
 				<Description>Fired when the widgets lost focus</Description>
 			</Event>
+			<Event name="NodeClicked">
+				<Description>Fired when node is clicked.</Description>
+				<Arguments>
+					<Argument name="NodeId" type="String" index="0" required="true">
+						<Description>Node Id of the clicked node (eg. NS0|Numeric|85)</Description>
+					</Argument>
+					<Argument name="NamespaceIndex" type="Integer" index="1" required="true">
+						<Description>Namespace index of the clicked node (eg. 0)</Description>
+					</Argument>
+					<Argument name="IdentifierType" type="Integer" index="2" required="true">
+						<Description>Identifier type of the clicked node, based on UAIdentifierType enum (Numeric=0, String=1, Guid=2, Opaque=3)</Description>
+					</Argument>
+					<Argument name="Identifier" type="String" index="3" required="true">
+						<Description>Idenfier of the clicked node (eg. 85)</Description>
+					</Argument>
+				</Arguments>
+			</Event>
 			<Event name="VisibleChanged">
 				<Description>Fired when the visibility of the widget changes.</Description>
 				<Arguments>
@@ -159,8 +176,17 @@
 			<Property name="permissionView" type="RoleCollection" initOnly="true" localizable="false" editableBinding="false" readOnly="false" required="false" projectable="true" category="Accessibility">
 				<Description>restricts visibility to users, which have given roles</Description>
 			</Property>
-			<Property name="selectedNodeId" type="String" initOnly="false" localizable="false" editableBinding="false" readOnly="false" required="false" projectable="true" defaultValue="">
+			<Property name="selectedNodeId" type="String" initOnly="false" localizable="false" editableBinding="false" readOnly="false" required="false" projectable="true" category="Behavior" defaultValue="">
 				<Description>Actual selected nodeId in the tree (eg. NS0|Numeric|85)</Description>
+			</Property>
+			<Property name="selectedNodeIdentifier" type="String" initOnly="false" localizable="false" editableBinding="false" readOnly="false" required="false" projectable="true" category="Behavior" defaultValue="">
+				<Description>Actual selected nodeIdentifier in the tree (eg. 85)</Description>
+			</Property>
+			<Property name="selectedNodeIdentifierType" type="Integer" initOnly="false" localizable="false" editableBinding="false" readOnly="false" required="false" projectable="true" category="Behavior" defaultValue="0">
+				<Description>Actual selected nodeIdentifierType in the tree (eg. 0=Numeric, 1=String, 2=Guid, 3=Opaque)</Description>
+			</Property>
+			<Property name="selectedNodeNamespaceIndex" type="Integer" initOnly="false" localizable="false" editableBinding="false" readOnly="false" required="false" projectable="true" category="Behavior" defaultValue="0">
+				<Description>Actual selected nodeNamespaceIndex in the tree (eg. 0)</Description>
 			</Property>
 			<Property name="serverAlias" type="String" initOnly="true" localizable="false" editableBinding="false" readOnly="false" required="false" projectable="true" category="Behavior" defaultValue="">
 				<Description>Server alias of the server opcua you want to explore</Description>

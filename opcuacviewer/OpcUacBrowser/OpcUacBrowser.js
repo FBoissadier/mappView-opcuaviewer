@@ -51,8 +51,33 @@ define(["widgets/brease/common/libs/wfUtils/UtilsImage", "widgets/opcuacviewer/O
     /**
      * @cfg {String} selectedNodeId=''
      * @iatStudioExposed
+     * @iatCategory Behavior
      * @bindable
      * Actual selected nodeId in the tree (eg. NS0|Numeric|85)
+     */
+
+    /**
+     * @cfg {String} selectedNodeIdentifier=''
+     * @iatStudioExposed
+     * @iatCategory Behavior
+     * @bindable
+     * Actual selected nodeIdentifier in the tree (eg. 85)
+     */
+
+    /**
+     * @cfg {Integer} selectedNodeNamespaceIndex=0
+     * @iatStudioExposed
+     * @iatCategory Behavior
+     * @bindable
+     * Actual selected nodeNamespaceIndex in the tree (eg. 0)
+     */
+
+    /**
+     * @cfg {Integer} selectedNodeIdentifierType=0
+     * @iatStudioExposed
+     * @iatCategory Behavior
+     * @bindable
+     * Actual selected nodeIdentifierType in the tree (eg. 0=Numeric, 1=String, 2=Guid, 3=Opaque)
      */
 
     /**
@@ -101,6 +126,9 @@ define(["widgets/brease/common/libs/wfUtils/UtilsImage", "widgets/opcuacviewer/O
         {
             serverAlias: "",
             selectedNodeId: "",
+            selectedNodeIdentifier: "",
+            selectedNodeNamespaceIndex: 0,
+            selectedNodeIdentifierType: 0,
             imageOpcuaVariable: "",
             imageOpcuaPackageOpen: "",
             imageOpcuaPackageClose: "",
@@ -152,6 +180,9 @@ define(["widgets/brease/common/libs/wfUtils/UtilsImage", "widgets/opcuacviewer/O
             serverAlias: this.settings.serverAlias,
             nodes: [],
             selectedNodeId: this.settings.selectedNodeId,
+            selectedNodeIdentifier: this.settings.selectedNodeIdentifier,
+            selectedNodeNamespaceIndex: this.settings.selectedNodeNamespaceIndex,
+            selectedNodeIdentifierType: this.settings.selectedNodeIdentifierType,
         };
 
         this.treeContainer = $('<div class="opcua-treeview"></div>');
@@ -388,12 +419,17 @@ define(["widgets/brease/common/libs/wfUtils/UtilsImage", "widgets/opcuacviewer/O
                 el.on("click", (e) => {
                     e.stopPropagation();
                     this._toggleNode(li, node);
+                    this._fireNodeClicked(node);
+                    this._changeClassSelected(li);
                 })
             );
         } else if (node.nodeClass === 2 || node.nodeClass === 4) {
             [imgIcon, svgIcon, name].forEach((el) =>
-                el.on("click", () => this._onNodeClick(node))
-            );
+                el.on("click", () => {
+                    this._onNodeClick(node);
+                    this._fireNodeClicked(node);
+                    this._changeClassSelected(li);
+                }));
         }
 
         parentUl.append(li);
@@ -403,9 +439,8 @@ define(["widgets/brease/common/libs/wfUtils/UtilsImage", "widgets/opcuacviewer/O
     /* ------------------------- Node Interaction Methods ------------------------- */
 
     p._toggleNode = function (li, node) {
-        this.data.selectedNodeId = node.nodeId;
         const childList = li.children("ul");
-        const icon = li.find(".opcua-icon");
+        const icon = li.find(" > .opcua-node-container > .opcua-icon");
 
         if (childList.is(":visible")) {
             childList.hide();
@@ -428,7 +463,6 @@ define(["widgets/brease/common/libs/wfUtils/UtilsImage", "widgets/opcuacviewer/O
     };
 
     p._onNodeClick = function (node) {
-        this.data.selectedNodeId = node.nodeId;
         console.log("Node clicked:", node);
 
         if (node.nodeClass === 2) {
@@ -436,9 +470,15 @@ define(["widgets/brease/common/libs/wfUtils/UtilsImage", "widgets/opcuacviewer/O
         } else if (node.nodeClass === 4) {
             this._showMethodInfo(node.nodeId);
         }
+
     };
 
     /* ------------------------- Utility Methods ------------------------- */
+
+    p._changeClassSelected = function (li) {
+        $("li.opcua-node.selected").removeClass("selected");
+        li.addClass("selected");
+    }
 
     p._refreshImages = function () {
         this.setImageOpcuaVariable(this.settings.imageOpcuaVariable, true);
@@ -507,7 +547,57 @@ define(["widgets/brease/common/libs/wfUtils/UtilsImage", "widgets/opcuacviewer/O
 
     p._showMethodInfo = function (nodeId) {
         console.warn("OpcUacBrowser: Showing method info is not supported.");
-        return;
+    };
+
+    /* ------------------------- Events ------------------------- */
+    p._fireNodeClicked = function (node) {
+
+        var NodeId = node.nodeId;
+        var NamespaceIndex = parseInt(node.nodeId.split("|")[0].replace("NS", ""));
+        var IdentifierTypeString = node.nodeId.split("|")[1];
+        var IdentifierType;
+        switch (IdentifierTypeString) {
+            case "Numeric":
+                IdentifierType = 0;
+                break;
+            case "String":
+                IdentifierType = 1;
+                break;
+            case "Guid":
+                IdentifierType = 2;
+                break;
+            case "Opaque":
+                IdentifierType = 3;
+                break;
+            default:
+                IdentifierType = -1; // Unknown type
+        }
+        var Identifier = node.nodeId.split("|")[2];
+
+        /**
+         * @event NodeClicked
+         * @iatStudioExposed
+         * Fired when node is clicked.
+         * 
+         * @param {String} NodeId Node Id of the clicked node (eg. NS0|Numeric|85)
+         * @param {Integer} NamespaceIndex Namespace index of the clicked node (eg. 0)
+         * @param {Integer} IdentifierType Identifier type of the clicked node, based on UAIdentifierType enum (Numeric=0, String=1, Guid=2, Opaque=3)
+         * @param {String} Identifier Idenfier of the clicked node (eg. 85)
+         */
+        this.dispatchServerEvent('NodeClicked', {
+                NodeId: NodeId,
+                NamespaceIndex: NamespaceIndex,
+                IdentifierType: IdentifierType,
+                Identifier: Identifier,
+        });
+
+
+        if (this.data.selectedNodeId !== node.nodeId) {
+            this.setSelectedNodeId(node.nodeId);
+            this.setSelectedNodeIdentifier(Identifier);
+            this.setSelectedNodeNamespaceIndex(NamespaceIndex);
+            this.setSelectedNodeIdentifierType(IdentifierType);
+        }
     };
 
     /* ------------------------- Image Handling Methods ------------------------- */
@@ -644,6 +734,73 @@ define(["widgets/brease/common/libs/wfUtils/UtilsImage", "widgets/opcuacviewer/O
     p.getSelectedNodeId = function () {
         return this.data.selectedNodeId;
     };
+
+    /**
+     * @method setSelectedNodeId
+     * Set selected node id in the tree
+     * @param {String} nodeId
+     */
+    p.setSelectedNodeId = function (nodeId) {
+        this.data.selectedNodeId = nodeId;
+        this.sendValueChange({ selectedNodeId: this.getSelectedNodeId() });
+    }
+
+    /**
+     * @method getSelectedNodeIdentifier
+     * Get selected node identifier in the tree
+     * @return {String}
+     */
+    p.getSelectedNodeIdentifier = function () {
+        return this.data.selectedNodeIdentifier;
+    }
+
+    /**
+     * @method setSelectedNodeIdentifier
+     * Set selected node identifier in the tree
+     * @param {String} nodeIdentifier
+     */
+    p.setSelectedNodeIdentifier = function (nodeIdentifier) {
+        this.data.selectedNodeIdentifier = nodeIdentifier;
+        this.sendValueChange({ selectedNodeIdentifier: this.getSelectedNodeIdentifier() });
+    }
+
+    /**
+     * @method getSelectedNodeNamespaceIndex
+     * Get selected node namespace index in the tree
+     * @return {Integer}
+     */
+    p.getSelectedNodeNamespaceIndex = function () {
+        return this.data.selectedNodeNamespaceIndex;
+    }
+
+    /**
+     * @method setSelectedNodeNamespaceIndex
+     * Set selected node namespace index in the tree
+     * @param {Integer} nodeNamespaceIndex
+     */
+    p.setSelectedNodeNamespaceIndex = function (nodeNamespaceIndex) {
+        this.data.selectedNodeNamespaceIndex = nodeNamespaceIndex;
+        this.sendValueChange({ selectedNodeNamespaceIndex: this.getSelectedNodeNamespaceIndex() });
+    }
+
+    /**
+     * @method getSelectedNodeIdentifierType
+     * Get selected node identifier type in the tree
+     * @return {Integer}
+     */
+    p.getSelectedNodeIdentifierType = function () {
+        return this.data.selectedNodeIdentifierType;
+    }
+
+    /**
+     * @method setSelectedNodeIdentifierType
+     * Set selected node identifier type in the tree
+     * @param {Integer} nodeIdentifierType
+     */
+    p.setSelectedNodeIdentifierType = function (nodeIdentifierType) {
+        this.data.selectedNodeIdentifierType = nodeIdentifierType;
+        this.sendValueChange({ selectedNodeIdentifierType: this.getSelectedNodeIdentifierType() });
+    }
 
     /**
      * @method setUseSVGStyling
