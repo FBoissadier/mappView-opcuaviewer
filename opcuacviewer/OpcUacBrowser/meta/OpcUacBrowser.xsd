@@ -4,8 +4,6 @@
 	<xs:complexContent>
 		<xs:restriction base="iat:brease.core.BaseContentWidget">
 			<xs:attribute name="tabIndex" use="optional" type="types:Integer" default="-1" />
-			<xs:attribute name="height" use="optional" type="types:Size" default="30" />
-			<xs:attribute name="width" use="optional" type="types:Size" default="100" />
 		</xs:restriction>
 	</xs:complexContent>
 </xs:complexType>
@@ -19,7 +17,6 @@
 			<xs:attribute name="selectedNodeId" use="optional" type="types:String" default="" />
 			<xs:attribute name="serverAlias" use="optional" type="types:String" default="" />
 			<xs:attribute name="useSVGStyling" use="optional" type="types:Boolean" default="true" />
-			<xs:attribute name="backColor" use="optional" type="types:Color" default="#FFDEAA" />
 		</xs:extension>
 	</xs:complexContent>
 </xs:complexType>

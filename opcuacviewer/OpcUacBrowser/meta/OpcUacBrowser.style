@@ -12,8 +12,110 @@ instance">
       <StyleElement attribute="@include elemHeight($value)"></StyleElement>
       <Description>outer height of widget</Description>
     </StyleProperty> 
-    <StyleProperty name="backColor" type="Color" default="#FFDEAA">
+    <StyleProperty name="backColor" type="Color" category="Appearance" default="#FFDEAA">
       <StyleElement attribute="background-color" />
     </StyleProperty>
+    <StyleProperty name="imageVariableWidth" type="ImageSize" not_styleable="true" category="Appearance" default="16" groupRefId="ImageVariableSize" groupOrder="1">
+      <StyleElement selector="img.opcua-variable" attribute="@include imageWidth($value)"></StyleElement>
+      <StyleElement selector="svg.opcua-variable" attribute="@include imageWidth($value)"></StyleElement>
+      <Description>width of the image for opcua variable</Description>
+    </StyleProperty>
+    <StyleProperty name="imageVariableHeight" type="ImageSize" not_styleable="true" category="Appearance" default="16" groupRefId="ImageVariableSize" groupOrder="2">
+      <StyleElement selector="img.opcua-variable" attribute="@include imageHeight($value)"></StyleElement>
+      <StyleElement selector="svg.opcua-variable" attribute="@include imageHeight($value)"></StyleElement>
+      <Description>height of the image for opcua variable</Description>
+    </StyleProperty>
+    <StyleProperty name="imageVariableColor" category="Appearance" type="Color" default="#000000" >
+      <StyleElement selector="&amp;:not(.active):not(.disabled) svg.opcua-variable" attribute="fill"></StyleElement>
+      <Description>Color of the image for opcua variable - only apply if a SVG image is used</Description>
+    </StyleProperty>
+    <StyleProperty name="imageMethodWidth" type="ImageSize" not_styleable="true" category="Appearance" default="16" groupRefId="ImageMethodSize" groupOrder="1">
+      <StyleElement selector="img.opcua-method" attribute="@include imageWidth($value)"></StyleElement>
+      <StyleElement selector="svg.opcua-method" attribute="@include imageWidth($value)"></StyleElement>
+      <Description>width of the image for opcua method</Description>
+    </StyleProperty>
+    <StyleProperty name="imageMethodHeight" type="ImageSize" not_styleable="true" category="Appearance" default="16" groupRefId="ImageMethodSize" groupOrder="2">
+      <StyleElement selector="img.opcua-method" attribute="@include imageHeight($value)"></StyleElement>
+      <StyleElement selector="svg.opcua-method" attribute="@include imageHeight($value)"></StyleElement>
+      <Description>height of the image for opcua method</Description>
+    </StyleProperty>
+    <StyleProperty name="imageMethodColor" category="Appearance" type="Color" default="#000000" >
+      <StyleElement selector="&amp;:not(.active):not(.disabled) svg.opcua-method" attribute="fill"></StyleElement>
+      <Description>Color of the image for opcua method - only apply if a SVG image is used</Description>
+    </StyleProperty>
+    <StyleProperty name="imagePackageOpenWidth" type="ImageSize" not_styleable="true" category="Appearance" default="16" groupRefId="ImagePackageOpenSize" groupOrder="1">
+      <StyleElement selector="img.opcua-object.expanded" attribute="@include imageWidth($value)"></StyleElement>
+      <StyleElement selector="svg.opcua-object.expanded" attribute="@include imageWidth($value)"></StyleElement>
+      <Description>width of the image for opcua package open</Description>
+    </StyleProperty>
+    <StyleProperty name="imagePackageOpenHeight" type="ImageSize" not_styleable="true" category="Appearance" default="16" groupRefId="ImagePackageOpenSize" groupOrder="2">
+      <StyleElement selector="img.opcua-object.expanded" attribute="@include imageHeight($value)"></StyleElement>
+      <StyleElement selector="svg.opcua-object.expanded" attribute="@include imageHeight($value)"></StyleElement>
+      <Description>height of the image for opcua package open</Description>
+    </StyleProperty>
+    <StyleProperty name="imagePackageOpenColor" category="Appearance" type="Color" default="#000000" >
+      <StyleElement selector="&amp;:not(.active):not(.disabled) svg.opcua-object.expanded" attribute="fill"></StyleElement>
+      <Description>Color of the image for opcua package open - only apply if a SVG image is used</Description>
+    </StyleProperty>
+    <StyleProperty name="imagePackageCloseWidth" type="ImageSize" not_styleable="true" category="Appearance" default="16" groupRefId="ImagePackageCloseSize" groupOrder="1">
+      <StyleElement selector="img.opcua-object.collapsed" attribute="@include imageWidth($value)"></StyleElement>
+      <StyleElement selector="svg.opcua-object.collapsed" attribute="@include imageWidth($value)"></StyleElement>
+      <Description>width of the image for opcua package close</Description>
+    </StyleProperty>
+    <StyleProperty name="imagePackageCloseHeight" type="ImageSize" not_styleable="true" category="Appearance" default="16" groupRefId="ImagePackageCloseSize" groupOrder="2">
+      <StyleElement selector="img.opcua-object.collapsed" attribute="@include imageHeight($value)"></StyleElement>
+      <StyleElement selector="svg.opcua-object.collapsed" attribute="@include imageHeight($value)"></StyleElement>
+      <Description>height of the image for opcua package close</Description>
+    </StyleProperty>
+    <StyleProperty name="imagePackageCloseColor" category="Appearance" type="Color" default="#000000" >
+      <StyleElement selector="&amp;:not(.active):not(.disabled) svg.opcua-object.collapsed" attribute="fill"></StyleElement>
+      <Description>Color of the image for opcua package close - only apply if a SVG image is used</Description>
+    </StyleProperty>
+
+    <StyleProperty name="fontSize" category="Font" type="PixelVal" default="12px">
+			<StyleElement selector="span.opcua-name" attribute="font-size"></StyleElement>
+			<Description>
+				Fontsize of the text in pixel
+			</Description>
+		</StyleProperty>
+		<StyleProperty name="fontName" category="Font" type="FontName" default="Arial">
+			<StyleElement selector="span.opcua-name" attribute="font-family"></StyleElement>
+			<Description>
+				Fontname of the text
+			</Description>
+		</StyleProperty>
+    <StyleProperty name="textColor" category="Appearance" type="Color" default="#000000" >
+			<StyleElement selector="span.opcua-name" attribute="color"></StyleElement>
+			<Description>
+        Sets the color of the text
+			</Description>
+		</StyleProperty>
+    <StyleProperty name="bold" category="Font" type="Boolean" default="false">
+			<StyleElement selector="span".opcua-name attribute="@include font-weight-bold($value)"></StyleElement>
+			<Description>
+				If *true* font style is bold
+			</Description>
+		</StyleProperty>
+		<StyleProperty name="italic" category="Font" type="Boolean" default="false">
+			<StyleElement selector="span.opcua-name" attribute="@include font-style-italic($value)"></StyleElement>
+			<Description>
+				If *true* font style is italic
+			</Description>
+		</StyleProperty>
+
   </StyleProperties>
+  <PropertyGroups>
+    <PropertyGroup name="ImageVariableSize" type="string" category="Appearance">
+      <Description>size of the image for opcua variable</Description>
+    </PropertyGroup>
+    <PropertyGroup name="ImageMethodSize" type="string" category="Appearance">
+      <Description>size of the image for opcua method</Description>
+    </PropertyGroup>
+    <PropertyGroup name="ImagePackageOpenSize" type="string" category="Appearance">
+      <Description>size of the image for opcua package open</Description>
+    </PropertyGroup>
+    <PropertyGroup name="ImagePackageCloseSize" type="string" category="Appearance">
+      <Description>size of the image for opcua package close</Description>
+    </PropertyGroup>
+  </PropertyGroups>
  </StyleInformation>
