@@ -14,6 +14,7 @@ instance">
     </StyleProperty> 
     <StyleProperty name="backColor" type="Color" category="Appearance" default="#FFDEAA">
       <StyleElement attribute="background-color" />
+      <Description>background color of the widget</Description>
     </StyleProperty>
     <StyleProperty name="imageVariableWidth" type="ImageSize" not_styleable="true" category="Appearance" default="16" groupRefId="ImageVariableSize" groupOrder="1">
       <StyleElement selector="img.opcua-variable" attribute="@include imageWidth($value)"></StyleElement>
@@ -91,7 +92,7 @@ instance">
 			</Description>
 		</StyleProperty>
     <StyleProperty name="bold" category="Font" type="Boolean" default="false">
-			<StyleElement selector="span".opcua-name attribute="@include font-weight-bold($value)"></StyleElement>
+			<StyleElement selector="span.opcua-name" attribute="@include font-weight-bold($value)"></StyleElement>
 			<Description>
 				If *true* font style is bold
 			</Description>
@@ -100,6 +101,25 @@ instance">
 			<StyleElement selector="span.opcua-name" attribute="@include font-style-italic($value)"></StyleElement>
 			<Description>
 				If *true* font style is italic
+			</Description>
+		</StyleProperty>
+
+    <StyleProperty name="borderStyle" type="BorderStyle" category="Appearance" default="solid">
+			<StyleElement attribute="border-style"></StyleElement>
+			<Description>
+				Style of the Border of the widget
+			</Description>
+		</StyleProperty>    
+		<StyleProperty name="borderWidth" type="PixelValCollection" category="Appearance" default="2px">
+			<StyleElement attribute="border-width"></StyleElement>
+			<Description>
+        Sets the width of the border. For further information, please check its type
+			</Description>
+		</StyleProperty>   
+    <StyleProperty name="borderColor" category="Appearance" type="ColorCollection" default="#5B7C70" >
+			<StyleElement attribute="border-color"></StyleElement>
+			<Description>
+        Sets the border color
 			</Description>
 		</StyleProperty>
 

@@ -1,5 +1,86 @@
 @import "mixins.scss";
 @mixin widgets_opcuacviewer_OpcUacBrowser_base {
+	@include elemWidth(100);
+	@include elemHeight(30);
+	background-color: #FFDEAA;
+	img.opcua-variable {
+		@include imageWidth(16);
+	}
+	svg.opcua-variable {
+		@include imageWidth(16);
+	}
+	img.opcua-variable {
+		@include imageHeight(16);
+	}
+	svg.opcua-variable {
+		@include imageHeight(16);
+	}
+	&:not(.active):not(.disabled) svg.opcua-variable {
+		fill: #000000;
+	}
+	img.opcua-method {
+		@include imageWidth(16);
+	}
+	svg.opcua-method {
+		@include imageWidth(16);
+	}
+	img.opcua-method {
+		@include imageHeight(16);
+	}
+	svg.opcua-method {
+		@include imageHeight(16);
+	}
+	&:not(.active):not(.disabled) svg.opcua-method {
+		fill: #000000;
+	}
+	img.opcua-object.expanded {
+		@include imageWidth(16);
+	}
+	svg.opcua-object.expanded {
+		@include imageWidth(16);
+	}
+	img.opcua-object.expanded {
+		@include imageHeight(16);
+	}
+	svg.opcua-object.expanded {
+		@include imageHeight(16);
+	}
+	&:not(.active):not(.disabled) svg.opcua-object.expanded {
+		fill: #000000;
+	}
+	img.opcua-object.collapsed {
+		@include imageWidth(16);
+	}
+	svg.opcua-object.collapsed {
+		@include imageWidth(16);
+	}
+	img.opcua-object.collapsed {
+		@include imageHeight(16);
+	}
+	svg.opcua-object.collapsed {
+		@include imageHeight(16);
+	}
+	&:not(.active):not(.disabled) svg.opcua-object.collapsed {
+		fill: #000000;
+	}
+	span.opcua-name {
+		font-size: 12px;
+	}
+	span.opcua-name {
+		font-family: Arial;
+	}
+	span.opcua-name {
+		color: #000000;
+	}
+	span.opcua-name {
+		@include font-weight-bold(false);
+	}
+	span.opcua-name {
+		@include font-style-italic(false);
+	}
+	border-style: solid;
+	border-width: 2px;
+	border-color: #5B7C70;
 
 }
 

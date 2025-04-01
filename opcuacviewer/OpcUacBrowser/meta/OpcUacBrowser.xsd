@@ -4,6 +4,8 @@
 	<xs:complexContent>
 		<xs:restriction base="iat:brease.core.BaseContentWidget">
 			<xs:attribute name="tabIndex" use="optional" type="types:Integer" default="-1" />
+			<xs:attribute name="height" use="optional" type="types:Size" default="30" />
+			<xs:attribute name="width" use="optional" type="types:Size" default="100" />
 		</xs:restriction>
 	</xs:complexContent>
 </xs:complexType>
@@ -17,6 +19,27 @@
 			<xs:attribute name="selectedNodeId" use="optional" type="types:String" default="" />
 			<xs:attribute name="serverAlias" use="optional" type="types:String" default="" />
 			<xs:attribute name="useSVGStyling" use="optional" type="types:Boolean" default="true" />
+			<xs:attribute name="imagePackageCloseHeight" use="optional" type="types:ImageSize" default="16" />
+			<xs:attribute name="imagePackageCloseWidth" use="optional" type="types:ImageSize" default="16" />
+			<xs:attribute name="imagePackageOpenHeight" use="optional" type="types:ImageSize" default="16" />
+			<xs:attribute name="imagePackageOpenWidth" use="optional" type="types:ImageSize" default="16" />
+			<xs:attribute name="imageMethodHeight" use="optional" type="types:ImageSize" default="16" />
+			<xs:attribute name="imageMethodWidth" use="optional" type="types:ImageSize" default="16" />
+			<xs:attribute name="imageVariableHeight" use="optional" type="types:ImageSize" default="16" />
+			<xs:attribute name="imageVariableWidth" use="optional" type="types:ImageSize" default="16" />
+			<xs:attribute name="backColor" use="optional" type="types:Color" default="#FFDEAA" />
+			<xs:attribute name="imageVariableColor" use="optional" type="types:Color" default="#000000" />
+			<xs:attribute name="imageMethodColor" use="optional" type="types:Color" default="#000000" />
+			<xs:attribute name="imagePackageOpenColor" use="optional" type="types:Color" default="#000000" />
+			<xs:attribute name="imagePackageCloseColor" use="optional" type="types:Color" default="#000000" />
+			<xs:attribute name="fontSize" use="optional" type="types:PixelVal" default="12px" />
+			<xs:attribute name="fontName" use="optional" type="types:FontName" default="Arial" />
+			<xs:attribute name="textColor" use="optional" type="types:Color" default="#000000" />
+			<xs:attribute name="bold" use="optional" type="types:Boolean" default="false" />
+			<xs:attribute name="italic" use="optional" type="types:Boolean" default="false" />
+			<xs:attribute name="borderStyle" use="optional" type="types:BorderStyle" default="solid" />
+			<xs:attribute name="borderWidth" use="optional" type="types:PixelValCollection" default="2px" />
+			<xs:attribute name="borderColor" use="optional" type="types:ColorCollection" default="#5B7C70" />
 		</xs:extension>
 	</xs:complexContent>
 </xs:complexType>

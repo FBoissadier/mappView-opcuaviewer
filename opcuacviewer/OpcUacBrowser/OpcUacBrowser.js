@@ -1,10 +1,12 @@
 "use strict";
-define(["widgets/brease/common/libs/wfUtils/UtilsImage", "brease"], function (
+define(["widgets/brease/common/libs/wfUtils/UtilsImage", "widgets/opcuacviewer/OpcUacBrowser/libs/EditorHandles", "brease"], function (
     UtilsImage,
+    EditorHandles,
     {
         services: { opcua },
         config: breaseConfig,
-        core: { BaseWidget: SuperClass, Types },
+        core: { BaseWidget: SuperClass, Types, CommonCSSClasses},
+        events: { BreaseEvent },
         helper: { scroller },
     }
 ) {
@@ -121,6 +123,25 @@ define(["widgets/brease/common/libs/wfUtils/UtilsImage", "brease"], function (
         this._initScroller();
 
         SuperClass.prototype.init.apply(this, arguments);
+    };
+
+    // override method called in BaseWidget.init
+    p._initEditor = function () {
+        this.el.addClass(CommonCSSClasses.EDITOR_OUTLINE);
+        var editorHandles = new EditorHandles(this);
+        this.getHandles = function () {
+            return editorHandles.getHandles();
+        };
+        this.designer.getSelectionDecoratables = function () {
+            return editorHandles.getSelectionDecoratables();
+        };
+        this.bindEditorEventListeners();
+        this.dispatchEvent(new CustomEvent(BreaseEvent.WIDGET_EDITOR_IF_READY, { bubbles: true }));
+    };
+
+    p.bindEditorEventListeners = function () {   
+        this.elem.addEventListener(BreaseEvent.WIDGET_STYLE_PROPERTIES_CHANGED, this._bind('_refreshScroller'));
+        this.elem.addEventListener(BreaseEvent.WIDGET_PROPERTIES_CHANGED, this._bind('_refreshScroller'));
     };
 
     p._initWidgetStructure = function () {
@@ -456,6 +477,10 @@ define(["widgets/brease/common/libs/wfUtils/UtilsImage", "brease"], function (
     };
 
     p._readVariable = function (nodeId) {
+        if (breaseConfig.editMode) {
+            console.warn("OpcUacBrowser: Reading variable in edit mode is not supported.");
+            return;
+        }
         opcua
             .read([
                 {
@@ -478,6 +503,11 @@ define(["widgets/brease/common/libs/wfUtils/UtilsImage", "brease"], function (
                 console.log("OpcUa variable", nodeId, "value:", value);
                 // Display value in your UI
             });
+    };
+
+    p._showMethodInfo = function (nodeId) {
+        console.warn("OpcUacBrowser: Showing method info is not supported.");
+        return;
     };
 
     /* ------------------------- Image Handling Methods ------------------------- */

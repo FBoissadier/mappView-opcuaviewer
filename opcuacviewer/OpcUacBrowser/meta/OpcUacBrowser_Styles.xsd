@@ -8,6 +8,18 @@
 		<xs:complexContent>
 			<xs:extension base="sd:stylesBase">
 				<xs:attribute name="backColor" use="optional" type="kt:Color"></xs:attribute>
+				<xs:attribute name="imageVariableColor" use="optional" type="kt:Color"></xs:attribute>
+				<xs:attribute name="imageMethodColor" use="optional" type="kt:Color"></xs:attribute>
+				<xs:attribute name="imagePackageOpenColor" use="optional" type="kt:Color"></xs:attribute>
+				<xs:attribute name="imagePackageCloseColor" use="optional" type="kt:Color"></xs:attribute>
+				<xs:attribute name="fontSize" use="optional" type="kt:PixelVal"></xs:attribute>
+				<xs:attribute name="fontName" use="optional" type="kt:FontName"></xs:attribute>
+				<xs:attribute name="textColor" use="optional" type="kt:Color"></xs:attribute>
+				<xs:attribute name="bold" use="optional" type="kt:Boolean"></xs:attribute>
+				<xs:attribute name="italic" use="optional" type="kt:Boolean"></xs:attribute>
+				<xs:attribute name="borderStyle" use="optional" type="kt:BorderStyle"></xs:attribute>
+				<xs:attribute name="borderWidth" use="optional" type="kt:PixelValCollection"></xs:attribute>
+				<xs:attribute name="borderColor" use="optional" type="kt:ColorCollection"></xs:attribute>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
