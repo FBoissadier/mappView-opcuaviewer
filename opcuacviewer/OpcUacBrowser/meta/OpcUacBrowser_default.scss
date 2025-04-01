@@ -1,0 +1,11 @@
+@import "mixins.scss";
+@mixin widgets_opcuacviewer_OpcUacBrowser_base {
+	@include elemWidth(100);
+	@include elemHeight(30);
+	background-color: #FFDEAA;
+
+}
+
+.widgets_opcuacviewer_OpcUacBrowser_style_default {
+@include widgets_opcuacviewer_OpcUacBrowser_base
+}

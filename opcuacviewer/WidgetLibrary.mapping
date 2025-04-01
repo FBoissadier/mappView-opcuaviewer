@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Mappings>
+  <Mapping parameter="widgets.opcuacviewer.OpcUacBrowser.Action.SetEnable.value" type="BOOL"/>
+  <Mapping parameter="widgets.opcuacviewer.OpcUacBrowser.Action.SetImageOpcuaMethod.image" type="ANY_STRING"/>
+  <Mapping parameter="widgets.opcuacviewer.OpcUacBrowser.Action.SetImageOpcuaPackageClose.image" type="ANY_STRING"/>
+  <Mapping parameter="widgets.opcuacviewer.OpcUacBrowser.Action.SetImageOpcuaPackageOpen.image" type="ANY_STRING"/>
+  <Mapping parameter="widgets.opcuacviewer.OpcUacBrowser.Action.SetImageOpcuaVariable.image" type="ANY_STRING"/>
+  <Mapping parameter="widgets.opcuacviewer.OpcUacBrowser.Action.SetStyle.value" type="ANY_STRING"/>
+  <Mapping parameter="widgets.opcuacviewer.OpcUacBrowser.Action.SetVisible.value" type="BOOL"/>
+</Mappings>

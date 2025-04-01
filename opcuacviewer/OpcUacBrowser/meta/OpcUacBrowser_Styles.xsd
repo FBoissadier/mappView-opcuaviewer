@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema targetNamespace="http://www.br-automation.com/iat2015/styles/engineering/v1"
+        xmlns:xs="http://www.w3.org/2001/XMLSchema"
+        xmlns:sd="http://www.br-automation.com/iat2015/styles/engineering/v1"
+        xmlns:kt="http://www.br-automation.com/iat2015/keywordTypes/v1"
+        elementFormDefault="qualified">
+	<xs:complexType name="widgets.opcuacviewer.OpcUacBrowser">
+		<xs:complexContent>
+			<xs:extension base="sd:stylesBase">
+				<xs:attribute name="backColor" use="optional" type="kt:Color"></xs:attribute>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+</xs:schema>
