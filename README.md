@@ -56,7 +56,7 @@ The `OpcUacBrowser` widget exposes the following properties, as defined in `OpcU
 | `selectedNodeIdentifier` | `String`             | Actual selected nodeIdentifier in the tree (e.g., `85`).                                                | ✅          | No            | `''`              |
 | `selectedNodeNamespaceIndex` | `Integer`        | Actual selected nodeNamespaceIndex in the tree (e.g., `0`).                                             | ✅          | No            | `0`               |
 | `selectedNodeIdentifierType` | `Integer`        | Actual selected nodeIdentifierType in the tree (e.g., `0=Numeric, 1=String, 2=Guid, 3=Opaque`).         | ✅          | No            | `0`               |
-| `serverAlias` | `String`        | Server alias of the server opcua you want to explore (Defined in the OpcUaServer.uaserver file)         | ✅          | ✅            | `''`               |
+| `serverAlias` | `String`        | Server alias of the server opcua you want to explore (Defined in the OpcUaServer.uaserver file)         | ❌          | ✅            | `''`               |
 
 ---
 
