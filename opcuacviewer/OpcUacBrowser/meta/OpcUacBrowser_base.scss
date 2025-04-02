@@ -81,6 +81,15 @@
 	border-style: solid;
 	border-width: 2px;
 	border-color: #5B7C70;
+	.opcua-node.selected>.opcua-node-container {
+		background-color: #0078D7;
+	}
+	.opcua-node.selected>.opcua-node-container>span {
+		color: #FFFFFF;
+	}
+	.opcua-node:hover:not(.selected)>.opcua-node-container  {
+		background-color: #E5F1fB;
+	}
 
 }
 

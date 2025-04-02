@@ -43,6 +43,9 @@
 			<xs:attribute name="borderStyle" use="optional" type="types:BorderStyle" default="solid" />
 			<xs:attribute name="borderWidth" use="optional" type="types:PixelValCollection" default="2px" />
 			<xs:attribute name="borderColor" use="optional" type="types:ColorCollection" default="#5B7C70" />
+			<xs:attribute name="selectedBackColor" use="optional" type="types:Color" default="#0078D7" />
+			<xs:attribute name="selectedTextColor" use="optional" type="types:Color" default="#FFFFFF" />
+			<xs:attribute name="hoverBackColor" use="optional" type="types:Color" default="#E5F1fB" />
 		</xs:extension>
 	</xs:complexContent>
 </xs:complexType>

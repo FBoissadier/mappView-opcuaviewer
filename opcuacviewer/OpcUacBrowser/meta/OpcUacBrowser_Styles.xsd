@@ -20,6 +20,9 @@
 				<xs:attribute name="borderStyle" use="optional" type="kt:BorderStyle"></xs:attribute>
 				<xs:attribute name="borderWidth" use="optional" type="kt:PixelValCollection"></xs:attribute>
 				<xs:attribute name="borderColor" use="optional" type="kt:ColorCollection"></xs:attribute>
+				<xs:attribute name="selectedBackColor" use="optional" type="kt:Color"></xs:attribute>
+				<xs:attribute name="selectedTextColor" use="optional" type="kt:Color"></xs:attribute>
+				<xs:attribute name="hoverBackColor" use="optional" type="kt:Color"></xs:attribute>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>

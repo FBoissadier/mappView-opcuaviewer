@@ -122,6 +122,18 @@ instance">
         Sets the border color
 			</Description>
 		</StyleProperty>
+    <StyleProperty name="selectedBackColor" category="Appearance" type="Color" default="#0078D7" >
+      <StyleElement selector=".opcua-node.selected&gt;.opcua-node-container" attribute="background-color"></StyleElement>
+      <Description>background color of the node selected</Description>
+    </StyleProperty>
+    <StyleProperty name="selectedTextColor" category="Appearance" type="Color" default="#FFFFFF" >
+      <StyleElement selector=".opcua-node.selected&gt;.opcua-node-container>span" attribute="color"></StyleElement>
+      <Description>text color of the node selected</Description>
+    </StyleProperty>
+    <StyleProperty name="hoverBackColor" category="Appearance" type="Color" default="#E5F1fB" >
+      <StyleElement selector=".opcua-node:hover:not(.selected)&gt;.opcua-node-container " attribute="background-color"></StyleElement>
+      <Description>background color when hover a node not selected</Description>
+    </StyleProperty>
 
   </StyleProperties>
   <PropertyGroups>

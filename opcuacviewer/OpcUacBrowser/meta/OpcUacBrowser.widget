@@ -323,6 +323,18 @@ or if autofocus should be disabled (-1)				</Description>
 				<StyleElement attribute="border-color"/>
 				<Description>Sets the border color</Description>
 			</StyleProperty>
+			<StyleProperty name="selectedBackColor" category="Appearance" type="Color" default="#0078D7">
+				<StyleElement selector=".opcua-node.selected&gt;.opcua-node-container" attribute="background-color"/>
+				<Description>background color of the node selected</Description>
+			</StyleProperty>
+			<StyleProperty name="selectedTextColor" category="Appearance" type="Color" default="#FFFFFF">
+				<StyleElement selector=".opcua-node.selected&gt;.opcua-node-container&gt;span" attribute="color"/>
+				<Description>text color of the node selected</Description>
+			</StyleProperty>
+			<StyleProperty name="hoverBackColor" category="Appearance" type="Color" default="#E5F1fB">
+				<StyleElement selector=".opcua-node:hover:not(.selected)&gt;.opcua-node-container " attribute="background-color"/>
+				<Description>background color when hover a node not selected</Description>
+			</StyleProperty>
 		</StyleProperties>
 		<PropertyGroups>
 			<PropertyGroup name="Size" type="String" category="Layout">

@@ -44,17 +44,6 @@
     padding-left: 10px;
   }
 
-  .opcua-node.selected>.opcua-node-container {
-    background-color: #0078d7; // Windows selection blue
-    span {
-      color: white;
-    }
-  }
-
-  .opcua-node:hover:not(.selected)>.opcua-node-container {
-    background-color: #e5f1fb; // Windows hover light blue
-  }
-
   /* Remove lines from root items */
   .opcua-tree-root > .opcua-node:before,
   .opcua-tree-root > .opcua-node:after {
