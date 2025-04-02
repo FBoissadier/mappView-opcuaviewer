@@ -176,16 +176,16 @@
 			<Property name="permissionView" type="RoleCollection" initOnly="true" localizable="false" editableBinding="false" readOnly="false" required="false" projectable="true" category="Accessibility">
 				<Description>restricts visibility to users, which have given roles</Description>
 			</Property>
-			<Property name="selectedNodeId" type="String" initOnly="false" localizable="false" editableBinding="false" readOnly="false" required="false" projectable="true" category="Behavior" defaultValue="">
+			<Property name="selectedNodeId" type="String" initOnly="false" localizable="false" editableBinding="false" readOnly="false" required="false" projectable="false" category="Behavior" defaultValue="">
 				<Description>Actual selected nodeId in the tree (eg. NS0|Numeric|85)</Description>
 			</Property>
-			<Property name="selectedNodeIdentifier" type="String" initOnly="false" localizable="false" editableBinding="false" readOnly="false" required="false" projectable="true" category="Behavior" defaultValue="">
+			<Property name="selectedNodeIdentifier" type="String" initOnly="false" localizable="false" editableBinding="false" readOnly="false" required="false" projectable="false" category="Behavior" defaultValue="">
 				<Description>Actual selected nodeIdentifier in the tree (eg. 85)</Description>
 			</Property>
-			<Property name="selectedNodeIdentifierType" type="Integer" initOnly="false" localizable="false" editableBinding="false" readOnly="false" required="false" projectable="true" category="Behavior" defaultValue="0">
+			<Property name="selectedNodeIdentifierType" type="Integer" initOnly="false" localizable="false" editableBinding="false" readOnly="false" required="false" projectable="false" category="Behavior" defaultValue="0">
 				<Description>Actual selected nodeIdentifierType in the tree (eg. 0=Numeric, 1=String, 2=Guid, 3=Opaque)</Description>
 			</Property>
-			<Property name="selectedNodeNamespaceIndex" type="Integer" initOnly="false" localizable="false" editableBinding="false" readOnly="false" required="false" projectable="true" category="Behavior" defaultValue="0">
+			<Property name="selectedNodeNamespaceIndex" type="Integer" initOnly="false" localizable="false" editableBinding="false" readOnly="false" required="false" projectable="false" category="Behavior" defaultValue="0">
 				<Description>Actual selected nodeNamespaceIndex in the tree (eg. 0)</Description>
 			</Property>
 			<Property name="serverAlias" type="String" initOnly="true" localizable="false" editableBinding="false" readOnly="false" required="false" projectable="true" category="Behavior" defaultValue="">

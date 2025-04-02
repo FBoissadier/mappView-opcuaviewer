@@ -53,6 +53,7 @@ define(["widgets/brease/common/libs/wfUtils/UtilsImage", "widgets/opcuacviewer/O
      * @iatStudioExposed
      * @iatCategory Behavior
      * @bindable
+     * @not_projectable
      * Actual selected nodeId in the tree (eg. NS0|Numeric|85)
      */
 
@@ -61,6 +62,7 @@ define(["widgets/brease/common/libs/wfUtils/UtilsImage", "widgets/opcuacviewer/O
      * @iatStudioExposed
      * @iatCategory Behavior
      * @bindable
+     * @not_projectable
      * Actual selected nodeIdentifier in the tree (eg. 85)
      */
 
@@ -69,6 +71,7 @@ define(["widgets/brease/common/libs/wfUtils/UtilsImage", "widgets/opcuacviewer/O
      * @iatStudioExposed
      * @iatCategory Behavior
      * @bindable
+     * @not_projectable
      * Actual selected nodeNamespaceIndex in the tree (eg. 0)
      */
 
@@ -77,6 +80,7 @@ define(["widgets/brease/common/libs/wfUtils/UtilsImage", "widgets/opcuacviewer/O
      * @iatStudioExposed
      * @iatCategory Behavior
      * @bindable
+     * @not_projectable
      * Actual selected nodeIdentifierType in the tree (eg. 0=Numeric, 1=String, 2=Guid, 3=Opaque)
      */
 

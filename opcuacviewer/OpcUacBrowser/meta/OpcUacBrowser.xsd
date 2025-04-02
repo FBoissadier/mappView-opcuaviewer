@@ -16,10 +16,6 @@
 			<xs:attribute name="imageOpcuaPackageClose" use="optional" type="types:ImagePath" default="" />
 			<xs:attribute name="imageOpcuaPackageOpen" use="optional" type="types:ImagePath" default="" />
 			<xs:attribute name="imageOpcuaVariable" use="optional" type="types:ImagePath" default="" />
-			<xs:attribute name="selectedNodeId" use="optional" type="types:String" default="" />
-			<xs:attribute name="selectedNodeIdentifier" use="optional" type="types:String" default="" />
-			<xs:attribute name="selectedNodeIdentifierType" use="optional" type="types:Integer" default="0" />
-			<xs:attribute name="selectedNodeNamespaceIndex" use="optional" type="types:Integer" default="0" />
 			<xs:attribute name="serverAlias" use="optional" type="types:String" default="" />
 			<xs:attribute name="useSVGStyling" use="optional" type="types:Boolean" default="true" />
 			<xs:attribute name="imagePackageCloseHeight" use="optional" type="types:ImageSize" default="16" />
