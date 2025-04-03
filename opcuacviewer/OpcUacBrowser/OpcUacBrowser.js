@@ -1,5 +1,5 @@
 "use strict";
-define(["widgets/brease/common/libs/wfUtils/UtilsImage", "widgets/opcuacviewer/OpcUacBrowser/libs/EditorHandles", "brease"], function (
+define(["widgets/opcuacviewer/common/libs/wfUtils/UtilsImage", "widgets/opcuacviewer/OpcUacBrowser/libs/EditorHandles", "brease"], function (
     UtilsImage,
     EditorHandles,
     {

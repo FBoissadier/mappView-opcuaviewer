@@ -7,7 +7,7 @@
 		</ASEngineeringInfo>
 		<Dependencies>
 			<Files>
-				<File>widgets/brease/common/libs/wfUtils/UtilsImage.js</File>
+				<File>widgets/opcuacviewer/common/libs/wfUtils/UtilsImage.js</File>
 				<File>widgets/opcuacviewer/OpcUacBrowser/libs/EditorHandles.js</File>
 				<File>brease.js</File>
 				<File>widgets.opcuacviewer.OpcUacBrowser.js</File>
