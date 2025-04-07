@@ -45,7 +45,8 @@ define(["widgets/opcuacviewer/common/libs/wfUtils/UtilsImage", "widgets/opcuacvi
      * @cfg {String} serverAlias=''
      * @iatCategory Behavior
      * @iatStudioExposed
-     * Server alias of the server opcua you want to explore
+     * Server alias of the server opcua you want to explore.
+     * If empty, the default server will be used.
      */
 
     /**
@@ -213,7 +214,10 @@ define(["widgets/opcuacviewer/common/libs/wfUtils/UtilsImage", "widgets/opcuacvi
     p._loadInitialData = function () {
         if (breaseConfig.editMode) {
             this._loadExampleNodes();
-        } else if (this.data.serverAlias) {
+        } else {
+            if (!this.data.serverAlias) {
+                console.warn("Server alias is empty. Using the default server.");
+            }
             this._loadRootNode();
         }
     };
@@ -553,12 +557,12 @@ define(["widgets/opcuacviewer/common/libs/wfUtils/UtilsImage", "widgets/opcuacvi
         console.warn("OpcUacBrowser: Showing method info is not supported.");
     };
 
-    /* ------------------------- Events ------------------------- */
+
     p._fireNodeClicked = function (node) {
 
-        var NodeId = node.nodeId;
-        var NamespaceIndex = parseInt(node.nodeId.split("|")[0].replace("NS", ""));
-        var IdentifierTypeString = node.nodeId.split("|")[1];
+        var nodeId = node.nodeId;
+        var NamespaceIndex = parseInt(nodeId.split("|")[0].replace("NS", ""));
+        var IdentifierTypeString = nodeId.split("|")[1];
         var IdentifierType;
         switch (IdentifierTypeString) {
             case "Numeric":
@@ -576,7 +580,7 @@ define(["widgets/opcuacviewer/common/libs/wfUtils/UtilsImage", "widgets/opcuacvi
             default:
                 IdentifierType = -1; // Unknown type
         }
-        var Identifier = node.nodeId.split("|")[2];
+        var Identifier = nodeId.split("|")[2];
 
         /**
          * @event NodeClicked
@@ -589,15 +593,15 @@ define(["widgets/opcuacviewer/common/libs/wfUtils/UtilsImage", "widgets/opcuacvi
          * @param {String} Identifier Idenfier of the clicked node (eg. 85)
          */
         this.dispatchServerEvent('NodeClicked', {
-                NodeId: NodeId,
+                NodeId: nodeId,
                 NamespaceIndex: NamespaceIndex,
                 IdentifierType: IdentifierType,
                 Identifier: Identifier,
         });
 
 
-        if (this.data.selectedNodeId !== node.nodeId) {
-            this.setSelectedNodeId(node.nodeId);
+        if (this.data.selectedNodeId !== nodeId) {
+            this.setSelectedNodeId(nodeId);
             this.setSelectedNodeIdentifier(Identifier);
             this.setSelectedNodeNamespaceIndex(NamespaceIndex);
             this.setSelectedNodeIdentifierType(IdentifierType);
