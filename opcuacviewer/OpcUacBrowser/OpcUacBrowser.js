@@ -1,15 +1,23 @@
 "use strict";
-define(["widgets/opcuacviewer/common/libs/wfUtils/UtilsImage", "widgets/opcuacviewer/OpcUacBrowser/libs/EditorHandles", "brease"], function (
-    UtilsImage,
-    EditorHandles,
-    {
-        services: { opcua },
-        config: breaseConfig,
-        core: { BaseWidget: SuperClass, Types, CommonCSSClasses},
-        events: { BreaseEvent },
-        helper: { scroller },
-    }
-) {
+define([
+        "widgets/opcuacviewer/common/libs/wfUtils/UtilsImage",
+        "widgets/opcuacviewer/OpcUacBrowser/libs/EditorHandles", 
+        "brease/services/opcua",
+        "brease/config",
+        "brease/core/BaseWidget",
+        "brease/core/Types",
+        "brease/events/BreaseEvent",
+        "brease/helper/scroller"
+    ], function (
+        UtilsImage,
+        EditorHandles,
+        opcua,
+        breaseConfig,
+        SuperClass,
+        Types,
+        BreaseEvent,
+        scroller
+    ) {
     /**
      * @class widgets.opcuacviewer.OpcUacBrowser
      * This widget is a OpcUa client browser for exploring OpcUa server
@@ -160,7 +168,7 @@ define(["widgets/opcuacviewer/common/libs/wfUtils/UtilsImage", "widgets/opcuacvi
 
     // override method called in BaseWidget.init
     p._initEditor = function () {
-        this.el.addClass(CommonCSSClasses.EDITOR_OUTLINE);
+        this.el.addClass('iatd-outline');
         var editorHandles = new EditorHandles(this);
         this.getHandles = function () {
             return editorHandles.getHandles();
@@ -195,7 +203,10 @@ define(["widgets/opcuacviewer/common/libs/wfUtils/UtilsImage", "widgets/opcuacvi
     };
 
     p._initDefaultImages = function () {
-        const { variable, packageOpen, packageClose, method } = DEFAULT_IMAGES;
+        const variable = DEFAULT_IMAGES["variable"];
+        const packageOpen = DEFAULT_IMAGES["packageOpen"];
+        const packageClose = DEFAULT_IMAGES["packageClose"];
+        const method = DEFAULT_IMAGES["method"];
 
         if (!this.settings.imageOpcuaVariable) {
             this.setImageOpcuaVariable(variable, true);
@@ -279,36 +290,38 @@ define(["widgets/opcuacviewer/common/libs/wfUtils/UtilsImage", "widgets/opcuacvi
                 },
             ],
         };
-
-        setTimeout(() => {
-            this._showLoading(false);
-            this._renderNode(null, exampleNodes);
+        var widget = this;
+        setTimeout(function (){
+            widget._showLoading(false);
+            widget._renderNode(null, exampleNodes);
         }, 500);
     };
 
     p._loadRootNode = function () {
+        var widget = this;
         this._showLoading(true);
         opcua
             .browse(ROOT_OPCUA_NODE, this.data.serverAlias)
-            .then((nodes) => {
+            .then(function(nodes) {
                 if (nodes.status.code === 0) {
-                    this._showLoading(false);
-                    this._renderNode(null, nodes);
+                    widget._showLoading(false);
+                    widget._renderNode(null, nodes);
                 } else {
-                    this._showError(
+                    widget._showError(
                         `Failed to load root node, error code: ${nodes.status.code}, message: ${nodes.status.message}`
                     );
                 }
             })
-            .catch((error) => {
+            .catch(function(error) {
                 console.error("Root browse failed:", error);
-                this._showError("Failed to load root node");
+                widget._showError("Failed to load root node");
             });
     };
 
     p._loadExampleChildren = function (nodeId, parentLi) {
+        var widget = this;
         // Simulate async loading
-        setTimeout(() => {
+        setTimeout(function() {
             const exampleChildren = {
                 status: { code: 0, message: "OK" },
                 referenceDescriptions: [],
@@ -347,19 +360,20 @@ define(["widgets/opcuacviewer/common/libs/wfUtils/UtilsImage", "widgets/opcuacvi
                 ];
             }
 
-            this._renderNode(parentLi.attr("id"), exampleChildren);
+            widget._renderNode(parentLi.attr("id"), exampleChildren);
             parentLi.find("> ul").show();
         }, 300);
     };
 
     p._loadChildren = function (nodeId, parentLi) {
+        var widget = this;
         opcua
             .browse(nodeId, this.data.serverAlias)
-            .then((children) => {
-                this._renderNode(parentLi.attr("id"), children);
+            .then(function(children) {
+                widget._renderNode(parentLi.attr("id"), children);
                 parentLi.find("> ul").show();
             })
-            .catch((error) => {
+            .catch(function(error) {
                 console.error("Browse failed for", nodeId, error);
             });
     };
@@ -367,6 +381,7 @@ define(["widgets/opcuacviewer/common/libs/wfUtils/UtilsImage", "widgets/opcuacvi
     /* ------------------------- Node Rendering Methods ------------------------- */
 
     p._renderNode = function (parentId, nodes) {
+        var widget = this;
         const ul = parentId
             ? $(`#${parentId}`).find("ul")
             : $('<ul class="opcua-tree-root"></ul>');
@@ -375,7 +390,7 @@ define(["widgets/opcuacviewer/common/libs/wfUtils/UtilsImage", "widgets/opcuacvi
 
         const uniqueNodeIds = new Set();
 
-        nodes.referenceDescriptions.forEach((node) => {
+        nodes.referenceDescriptions.forEach(function(node) {
             if (
                 (node.nodeClass === 1 ||
                     node.nodeClass === 2 ||
@@ -383,7 +398,7 @@ define(["widgets/opcuacviewer/common/libs/wfUtils/UtilsImage", "widgets/opcuacvi
                 !uniqueNodeIds.has(node.nodeId)
             ) {
                 uniqueNodeIds.add(node.nodeId);
-                this._createNodeElement(node, ul);
+                widget._createNodeElement(node, ul);
             }
         });
 
@@ -392,6 +407,7 @@ define(["widgets/opcuacviewer/common/libs/wfUtils/UtilsImage", "widgets/opcuacvi
     };
 
     p._createNodeElement = function (node, parentUl) {
+        var widget = this;
         const li = $('<li class="opcua-node"></li>');
         const nodeId = node.nodeId.replace(/[^a-zA-Z0-9]/g, "_");
         const nodeContainer = $('<div class="opcua-node-container"></div>');
@@ -423,21 +439,22 @@ define(["widgets/opcuacviewer/common/libs/wfUtils/UtilsImage", "widgets/opcuacvi
         // Setup interaction based on node type
         if (node.nodeClass === 1) {
             li.append($('<ul style="display:none;"></ul>'));
-            [imgIcon, svgIcon, name].forEach((el) =>
-                el.on("click", (e) => {
+            [imgIcon, svgIcon, name].forEach(function(el) {
+                el.on("click", function(e) {
                     e.stopPropagation();
-                    this._toggleNode(li, node);
-                    this._fireNodeClicked(node);
-                    this._changeClassSelected(li);
-                })
-            );
+                    widget._toggleNode(li, node);
+                    widget._fireNodeClicked(node);
+                    widget._changeClassSelected(li);
+                });
+            });
         } else if (node.nodeClass === 2 || node.nodeClass === 4) {
-            [imgIcon, svgIcon, name].forEach((el) =>
-                el.on("click", () => {
-                    this._onNodeClick(node);
-                    this._fireNodeClicked(node);
-                    this._changeClassSelected(li);
-                }));
+            [imgIcon, svgIcon, name].forEach(function(el) {
+                el.on("click", function() {
+                    widget._onNodeClick(node);
+                    widget._fireNodeClicked(node);
+                    widget._changeClassSelected(li);
+                })
+            });
         }
 
         parentUl.append(li);
@@ -504,8 +521,10 @@ define(["widgets/opcuacviewer/common/libs/wfUtils/UtilsImage", "widgets/opcuacvi
     p._refreshScroller = function () {
         if (this.scroller) {
             clearTimeout(this.refreshTimeOutScroller);
-            this.refreshTimeOutScroller = setTimeout(() => {
-                this.scroller?.refresh?.();
+            this.refreshTimeOutScroller = setTimeout(function() {
+                if (this.scroller) {
+                    this.scroller.refresh();
+                }
             }, 100);
         }
     };
@@ -529,6 +548,7 @@ define(["widgets/opcuacviewer/common/libs/wfUtils/UtilsImage", "widgets/opcuacvi
             console.warn("OpcUacBrowser: Reading variable in edit mode is not supported.");
             return;
         }
+        var widget = this;
         opcua
             .read([
                 {
@@ -536,9 +556,9 @@ define(["widgets/opcuacviewer/common/libs/wfUtils/UtilsImage", "widgets/opcuacvi
                     attributeId: 13, // Value attribute
                 },
             ], this.data.serverAlias)
-            .then((result) => {
+            .then(function(result) {
                 if (result.status.code !== 0) {
-                    this._showError(
+                    widget._showError(
                         "Failed to read variable, error code: ",
                         result.status.code,
                         " message: ",
@@ -707,6 +727,7 @@ define(["widgets/opcuacviewer/common/libs/wfUtils/UtilsImage", "widgets/opcuacvi
     };
 
     p._setImageHelper = function (image, iconClass, settingName, omitSettings) {
+        var widget = this;
         _rejectImageDeferredIfPending.call(this);
 
         if (!omitSettings) {
@@ -718,11 +739,11 @@ define(["widgets/opcuacviewer/common/libs/wfUtils/UtilsImage", "widgets/opcuacvi
 
         if (UtilsImage.isStylable(image) && this.settings.useSVGStyling) {
             this.imageDeferred = UtilsImage.getInlineSvg(image);
-            this.imageDeferred.done((svgElement) => {
-                svgs.each((i, el) => $(el).replaceWith(svgElement.clone()));
+            this.imageDeferred.done(function(svgElement) {
+                svgs.each(function(i, el) {$(el).replaceWith(svgElement.clone());});
                 svgs.show();
                 imgs.hide();
-                this._refreshScroller();
+                widget._refreshScroller();
             });
         } else {
             imgs.attr("src", image);
@@ -846,17 +867,9 @@ define(["widgets/opcuacviewer/common/libs/wfUtils/UtilsImage", "widgets/opcuacvi
     /* ------------------------- Private Helpers ------------------------- */
 
     function _rejectImageDeferredIfPending() {
-        if (this.imageDeferred?.state() === "pending") {
+        if (this.imageDeferred && this.imageDeferred.state() === "pending") {
             this.imageDeferred.reject();
         }
-    }
-
-    // Widget registration
-    if (window.lib_br?.controller?.widgetRegistry) {
-        lib_br.controller.widgetRegistry.define(
-            "widgets.opcuacviewer.OpcUacBrowser",
-            WidgetClass
-        );
     }
 
     return WidgetClass;

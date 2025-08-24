@@ -10,13 +10,13 @@
 				<File>widgets/opcuacviewer/common/libs/wfUtils/UtilsImage.js</File>
 				<File>widgets/opcuacviewer/OpcUacBrowser/libs/EditorHandles.js</File>
 				<File>brease.js</File>
-				<File>widgets.opcuacviewer.OpcUacBrowser.js</File>
+				<File>widgets/opcuacviewer/OpcUacBrowser.js</File>
 			</Files>
 			<Folders>
 				<Folder>widgets/opcuacviewer/OpcUacBrowser/assets</Folder>
 			</Folders>
 			<Widgets>
-				<Widget>widgets.opcuacviewer.OpcUacBrowser</Widget>
+				<Widget>widgets/opcuacviewer/OpcUacBrowser</Widget>
 			</Widgets>
 		</Dependencies>
 		<Categories>

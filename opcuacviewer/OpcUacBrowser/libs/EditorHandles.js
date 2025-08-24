@@ -1,5 +1,5 @@
 'use strict';
-define(['brease'], function ({ core: { Class } }) {
+define(['brease/core/Class'], function (Class) {
 
     var ModuleClass = Class.extend(function EditorHandles(widget) {
             Class.call(this);

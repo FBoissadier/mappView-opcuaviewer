@@ -1,13 +1,17 @@
-'use strict';
 define([
     'libs/d3/d3',
     'widgets/opcuacviewer/common/libs/wfUtils/SVGCache',
-    'brease'
-], function (d3, SVGCache, { enum: { Enum }, core: { Utils }, services }) {
+    'brease/controller/libs/LogCode',
+    'brease/enum/Enum',
+    'brease/core/Utils'
+], function (d3, SVGCache, LogCode, Enum, Utils) {
+
+    'use strict';
 
     /**
-     * @class widgets.opcuacviewer.common.libs.wfUtils.UtilsImage
-     * Utils used for mathematical operations for the calculator
+     * @class widgets.brease.common.libs.wfUtils.UtilsImage
+     * #Description
+     * Utils used for mathematicals operations for the calculator
     */
 
     var UtilsImage = {};
@@ -24,7 +28,7 @@ define([
     UtilsImage.getInlineSvg = function (sourceImage, avoidBrokenSvg, array, putInCache) {
         var deferedElement = $.Deferred();
         avoidBrokenSvg = (avoidBrokenSvg === true);
-        putInCache = (putInCache === true);
+        putInCache = (putInCache !== false);
         if (!Utils.hasSameOrigin(sourceImage)) {
             handleLoadError(sourceImage, avoidBrokenSvg, putInCache, deferedElement);
             logSameOriginWarning(sourceImage);
@@ -48,8 +52,8 @@ define([
     };
 
     function logSameOriginWarning(src) {
-        var log = services.libs.LogCode.getConfig(services.libs.LogCode.CROSS_ORIGIN_REQUEST_BLOCKED);
-        services.logger.log(log.code, Enum.EventLoggerCustomer.BUR, log.verboseLevel, log.severity, [src]);
+        var log = LogCode.getConfig(LogCode.CROSS_ORIGIN_REQUEST_BLOCKED);
+        brease.loggerService.log(log.code, Enum.EventLoggerCustomer.BUR, log.verboseLevel, log.severity, [src]);
     }
 
     function svgLoadResponse(sourceImage, deferedElement, array, avoidBrokenSvg, putInCache, error, xml) {
