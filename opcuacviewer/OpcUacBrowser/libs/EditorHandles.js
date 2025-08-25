@@ -1,5 +1,5 @@
-'use strict';
 define(['brease/core/Class'], function (Class) {
+    'use strict';
 
     var ModuleClass = Class.extend(function EditorHandles(widget) {
             Class.call(this);

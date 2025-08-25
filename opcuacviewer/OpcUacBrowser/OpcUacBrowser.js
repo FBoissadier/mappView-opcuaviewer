@@ -1,4 +1,3 @@
-"use strict";
 define([
         "widgets/opcuacviewer/common/libs/wfUtils/UtilsImage",
         "widgets/opcuacviewer/OpcUacBrowser/libs/EditorHandles", 
@@ -18,7 +17,9 @@ define([
         BreaseEvent,
         scroller
     ) {
-    /**
+    'use strict';
+
+     /**
      * @class widgets.opcuacviewer.OpcUacBrowser
      * This widget is a OpcUa client browser for exploring OpcUa server
      * @extends brease.core.BaseWidget
@@ -308,14 +309,10 @@ define([
                     widget._renderNode(null, nodes);
                 } else {
                     widget._showError(
-                        `Failed to load root node, error code: ${nodes.status.code}, message: ${nodes.status.message}`
+                        'Failed to load root node, error code: '+ nodes.status.code + ', message: ' + nodes.status.message
                     );
                 }
             })
-            .catch(function(error) {
-                console.error("Root browse failed:", error);
-                widget._showError("Failed to load root node");
-            });
     };
 
     p._loadExampleChildren = function (nodeId, parentLi) {
@@ -373,9 +370,6 @@ define([
                 widget._renderNode(parentLi.attr("id"), children);
                 parentLi.find("> ul").show();
             })
-            .catch(function(error) {
-                console.error("Browse failed for", nodeId, error);
-            });
     };
 
     /* ------------------------- Node Rendering Methods ------------------------- */
@@ -383,7 +377,7 @@ define([
     p._renderNode = function (parentId, nodes) {
         var widget = this;
         const ul = parentId
-            ? $(`#${parentId}`).find("ul")
+            ? $('#' + parentId).find('ul')
             : $('<ul class="opcua-tree-root"></ul>');
 
         if (!parentId) this.treeContainer.empty().append(ul);
@@ -413,7 +407,7 @@ define([
         const nodeContainer = $('<div class="opcua-node-container"></div>');
 
         // Create icons
-        const iconType = `opcua-${NODE_CLASSES[node.nodeClass].toLowerCase()}`;
+        const iconType = 'opcua-'+NODE_CLASSES[node.nodeClass].toLowerCase();
         const imgIcon = $('<img class="opcua-icon" src="" alt="">')
             .addClass(iconType)
             .hide();
@@ -434,7 +428,7 @@ define([
         nodeContainer.append(imgIcon, svgIcon, name);
         li.append(nodeContainer)
             .attr("data-nodeid", node.nodeId)
-            .attr("id", `node_${nodeId}`);
+            .attr("id", 'node_'+nodeId);
 
         // Setup interaction based on node type
         if (node.nodeClass === 1) {
@@ -453,7 +447,7 @@ define([
                     widget._onNodeClick(node);
                     widget._fireNodeClicked(node);
                     widget._changeClassSelected(li);
-                })
+                });
             });
         }
 
@@ -503,7 +497,7 @@ define([
     p._changeClassSelected = function (li) {
         $("li.opcua-node.selected").removeClass("selected");
         li.addClass("selected");
-    }
+    };
 
     p._refreshImages = function () {
         this.setImageOpcuaVariable(this.settings.imageOpcuaVariable, true);
@@ -519,11 +513,12 @@ define([
     };
 
     p._refreshScroller = function () {
+        var widget = this;
         if (this.scroller) {
             clearTimeout(this.refreshTimeOutScroller);
             this.refreshTimeOutScroller = setTimeout(function() {
-                if (this.scroller) {
-                    this.scroller.refresh();
+                if (widget.scroller) {
+                    widget.scroller.refresh();
                 }
             }, 100);
         }
@@ -539,7 +534,7 @@ define([
     };
 
     p._showError = function (message) {
-        this.treeContainer.html(`<div class="opcua-error">${message}</div>`);
+        this.treeContainer.html('<div class="opcua-error">'+message+'</div>');
         this._refreshScroller();
     };
 
@@ -734,8 +729,8 @@ define([
             this.settings[settingName] = image;
         }
 
-        const svgs = this.el.find(`svg.opcua-icon.opcua-${iconClass}`);
-        const imgs = this.el.find(`img.opcua-icon.opcua-${iconClass}`);
+        const svgs = this.el.find('svg.opcua-icon.opcua-'+iconClass);
+        const imgs = this.el.find('img.opcua-icon.opcua-'+iconClass);
 
         if (UtilsImage.isStylable(image) && this.settings.useSVGStyling) {
             this.imageDeferred = UtilsImage.getInlineSvg(image);
@@ -772,7 +767,7 @@ define([
     p.setSelectedNodeId = function (nodeId) {
         this.data.selectedNodeId = nodeId;
         this.sendValueChange({ selectedNodeId: this.getSelectedNodeId() });
-    }
+    };
 
     /**
      * @method getSelectedNodeIdentifier
@@ -781,7 +776,7 @@ define([
      */
     p.getSelectedNodeIdentifier = function () {
         return this.data.selectedNodeIdentifier;
-    }
+    };
 
     /**
      * @method setSelectedNodeIdentifier
@@ -791,7 +786,7 @@ define([
     p.setSelectedNodeIdentifier = function (nodeIdentifier) {
         this.data.selectedNodeIdentifier = nodeIdentifier;
         this.sendValueChange({ selectedNodeIdentifier: this.getSelectedNodeIdentifier() });
-    }
+    };
 
     /**
      * @method getSelectedNodeNamespaceIndex
@@ -800,7 +795,7 @@ define([
      */
     p.getSelectedNodeNamespaceIndex = function () {
         return this.data.selectedNodeNamespaceIndex;
-    }
+    };
 
     /**
      * @method setSelectedNodeNamespaceIndex
@@ -810,7 +805,7 @@ define([
     p.setSelectedNodeNamespaceIndex = function (nodeNamespaceIndex) {
         this.data.selectedNodeNamespaceIndex = nodeNamespaceIndex;
         this.sendValueChange({ selectedNodeNamespaceIndex: this.getSelectedNodeNamespaceIndex() });
-    }
+    };
 
     /**
      * @method getSelectedNodeIdentifierType
@@ -819,7 +814,7 @@ define([
      */
     p.getSelectedNodeIdentifierType = function () {
         return this.data.selectedNodeIdentifierType;
-    }
+    };
 
     /**
      * @method setSelectedNodeIdentifierType
@@ -829,7 +824,7 @@ define([
     p.setSelectedNodeIdentifierType = function (nodeIdentifierType) {
         this.data.selectedNodeIdentifierType = nodeIdentifierType;
         this.sendValueChange({ selectedNodeIdentifierType: this.getSelectedNodeIdentifierType() });
-    }
+    };
 
     /**
      * @method setUseSVGStyling

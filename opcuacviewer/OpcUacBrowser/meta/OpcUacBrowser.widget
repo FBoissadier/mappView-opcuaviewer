@@ -7,16 +7,46 @@
 		</ASEngineeringInfo>
 		<Dependencies>
 			<Files>
-				<File>widgets/opcuacviewer/common/libs/wfUtils/UtilsImage.js</File>
+				<File>DOMPurify.js</File>
+				<File>brease/config.js</File>
+				<File>brease/controller/FileManager.js</File>
+				<File>brease/controller/PopUpManager.js</File>
+				<File>brease/controller/ZoomManager.js</File>
+				<File>brease/controller/libs/KeyActions.js</File>
+				<File>brease/controller/libs/LogCode.js</File>
+				<File>brease/controller/libs/Utils.js</File>
+				<File>brease/controller/objects/PageType.js</File>
+				<File>brease/core/BaseWidget.js</File>
+				<File>brease/core/Class.js</File>
+				<File>brease/core/Decorator.js</File>
+				<File>brease/core/Types.js</File>
+				<File>brease/core/Utils.js</File>
+				<File>brease/core/libs/AsyncProcess.js</File>
+				<File>brease/core/libs/Deferred.js</File>
+				<File>brease/decorators/Permissions.js</File>
+				<File>brease/decorators/TooltipDependency.js</File>
+				<File>brease/enum/Enum.js</File>
+				<File>brease/enum/EnumObject.js</File>
+				<File>brease/events/BreaseEvent.js</File>
+				<File>brease/events/ClientSystemEvent.js</File>
+				<File>brease/events/DummyEvent.js</File>
+				<File>brease/events/EventHandler.js</File>
+				<File>brease/events/VirtualEvents.js</File>
+				<File>brease/helper/ScrollUtils.js</File>
+				<File>brease/helper/scroller.js</File>
+				<File>brease/services/RuntimeService.js</File>
+				<File>brease/services/libs/ServerCode.js</File>
+				<File>brease/services/libs/SocketResponse.js</File>
+				<File>brease/services/opcua.js</File>
+				<File>jquery.js</File>
+				<File>libs/d3/d3.js</File>
+				<File>libs/iscroll-probe.js</File>
 				<File>widgets/opcuacviewer/OpcUacBrowser/libs/EditorHandles.js</File>
-				<File>brease.js</File>
-				<File>widgets/opcuacviewer/OpcUacBrowser.js</File>
+				<File>widgets/opcuacviewer/common/libs/wfUtils/SVGCache.js</File>
+				<File>widgets/opcuacviewer/common/libs/wfUtils/UtilsImage.js</File>
 			</Files>
-			<Folders>
-				<Folder>widgets/opcuacviewer/OpcUacBrowser/assets</Folder>
-			</Folders>
 			<Widgets>
-				<Widget>widgets/opcuacviewer/OpcUacBrowser</Widget>
+				<Widget>widgets/opcuacviewer/OpcUacBrowser/OpcUacBrowser.js</Widget>
 			</Widgets>
 		</Dependencies>
 		<Categories>
@@ -40,7 +70,7 @@
 				<Description>Sets focus on the widget element, if it can be focused and keyboardOperation=true</Description>
 			</Method>
 			<Method name="SetEnable" read="false">
-				<Description>Sets the state of property &quot;enable&quot;</Description>
+				<Description>Sets the state of property «enable»</Description>
 				<Arguments>
 					<Argument name="value" type="Boolean" index="0" required="true"/>
 				</Arguments>
@@ -75,7 +105,7 @@
 				</Arguments>
 			</Method>
 			<Method name="SetVisible" read="false">
-				<Description>Sets the state of property &quot;visible&quot;</Description>
+				<Description>Sets the state of property «visible»</Description>
 				<Arguments>
 					<Argument name="value" type="Boolean" index="0" required="true"/>
 				</Arguments>
@@ -209,153 +239,156 @@ or if autofocus should be disabled (-1)				</Description>
 				<Description>change visibility</Description>
 			</Property>
 		</Properties>
-		<StyleProperties>
-			<StyleProperty name="width" type="Size" not_styleable="true" owner="widgets.opcuacviewer.OpcUacBrowser" category="Layout" groupRefId="Size" groupOrder="1" default="100">
-				<StyleElement attribute="@include elemWidth($value)"/>
-				<Description>outer width of widget</Description>
-			</StyleProperty>
-			<StyleProperty name="height" type="Size" not_styleable="true" owner="widgets.opcuacviewer.OpcUacBrowser" category="Layout" groupRefId="Size" groupOrder="2" default="30">
-				<StyleElement attribute="@include elemHeight($value)"/>
-				<Description>outer height of widget</Description>
-			</StyleProperty>
-			<StyleProperty name="top" type="Integer" not_styleable="true" owner="brease.core.BaseWidget" category="Layout" groupRefId="Position" groupOrder="1">
-				<StyleElement attribute="@include elemTop($value)"/>
-				<Description>absolute position measured from top boundary of parent container</Description>
-			</StyleProperty>
-			<StyleProperty name="left" type="Integer" not_styleable="true" owner="brease.core.BaseWidget" category="Layout" groupRefId="Position" groupOrder="2">
-				<StyleElement attribute="@include elemLeft($value)"/>
-				<Description>absolute position measured from left boundary of parent container</Description>
-			</StyleProperty>
-			<StyleProperty name="zIndex" type="UInteger" not_styleable="true" owner="brease.core.BaseWidget" category="Layout" required="true">
-				<StyleElement attribute="z-index"/>
-				<Description>The zIndex property specifies the z-order of a widget and its childs.&lt;br/&gt;
-        When widgets overlap, z-order determines which one covers the other. A widget with a larger zIndex generally covers a widget with a lower one.&lt;br/&gt;
-        The zIndex must be unique within a content.&lt;br/&gt;				</Description>
-			</StyleProperty>
-			<StyleProperty name="backColor" type="Color" category="Appearance" default="#FFDEAA">
-				<StyleElement attribute="background-color"/>
-				<Description>background color of the widget</Description>
-			</StyleProperty>
-			<StyleProperty name="imageVariableWidth" type="ImageSize" not_styleable="true" category="Appearance" default="16" groupRefId="ImageVariableSize" groupOrder="1">
-				<StyleElement selector="img.opcua-variable" attribute="@include imageWidth($value)"/>
-				<StyleElement selector="svg.opcua-variable" attribute="@include imageWidth($value)"/>
-				<Description>width of the image for opcua variable</Description>
-			</StyleProperty>
-			<StyleProperty name="imageVariableHeight" type="ImageSize" not_styleable="true" category="Appearance" default="16" groupRefId="ImageVariableSize" groupOrder="2">
-				<StyleElement selector="img.opcua-variable" attribute="@include imageHeight($value)"/>
-				<StyleElement selector="svg.opcua-variable" attribute="@include imageHeight($value)"/>
-				<Description>height of the image for opcua variable</Description>
-			</StyleProperty>
-			<StyleProperty name="imageVariableColor" category="Appearance" type="Color" default="#000000">
-				<StyleElement selector="&amp;:not(.active):not(.disabled) svg.opcua-variable" attribute="fill"/>
-				<Description>Color of the image for opcua variable - only apply if a SVG image is used</Description>
-			</StyleProperty>
-			<StyleProperty name="imageMethodWidth" type="ImageSize" not_styleable="true" category="Appearance" default="16" groupRefId="ImageMethodSize" groupOrder="1">
-				<StyleElement selector="img.opcua-method" attribute="@include imageWidth($value)"/>
-				<StyleElement selector="svg.opcua-method" attribute="@include imageWidth($value)"/>
-				<Description>width of the image for opcua method</Description>
-			</StyleProperty>
-			<StyleProperty name="imageMethodHeight" type="ImageSize" not_styleable="true" category="Appearance" default="16" groupRefId="ImageMethodSize" groupOrder="2">
-				<StyleElement selector="img.opcua-method" attribute="@include imageHeight($value)"/>
-				<StyleElement selector="svg.opcua-method" attribute="@include imageHeight($value)"/>
-				<Description>height of the image for opcua method</Description>
-			</StyleProperty>
-			<StyleProperty name="imageMethodColor" category="Appearance" type="Color" default="#000000">
-				<StyleElement selector="&amp;:not(.active):not(.disabled) svg.opcua-method" attribute="fill"/>
-				<Description>Color of the image for opcua method - only apply if a SVG image is used</Description>
-			</StyleProperty>
-			<StyleProperty name="imagePackageOpenWidth" type="ImageSize" not_styleable="true" category="Appearance" default="16" groupRefId="ImagePackageOpenSize" groupOrder="1">
-				<StyleElement selector="img.opcua-object.expanded" attribute="@include imageWidth($value)"/>
-				<StyleElement selector="svg.opcua-object.expanded" attribute="@include imageWidth($value)"/>
-				<Description>width of the image for opcua package open</Description>
-			</StyleProperty>
-			<StyleProperty name="imagePackageOpenHeight" type="ImageSize" not_styleable="true" category="Appearance" default="16" groupRefId="ImagePackageOpenSize" groupOrder="2">
-				<StyleElement selector="img.opcua-object.expanded" attribute="@include imageHeight($value)"/>
-				<StyleElement selector="svg.opcua-object.expanded" attribute="@include imageHeight($value)"/>
-				<Description>height of the image for opcua package open</Description>
-			</StyleProperty>
-			<StyleProperty name="imagePackageOpenColor" category="Appearance" type="Color" default="#000000">
-				<StyleElement selector="&amp;:not(.active):not(.disabled) svg.opcua-object.expanded" attribute="fill"/>
-				<Description>Color of the image for opcua package open - only apply if a SVG image is used</Description>
-			</StyleProperty>
-			<StyleProperty name="imagePackageCloseWidth" type="ImageSize" not_styleable="true" category="Appearance" default="16" groupRefId="ImagePackageCloseSize" groupOrder="1">
-				<StyleElement selector="img.opcua-object.collapsed" attribute="@include imageWidth($value)"/>
-				<StyleElement selector="svg.opcua-object.collapsed" attribute="@include imageWidth($value)"/>
-				<Description>width of the image for opcua package close</Description>
-			</StyleProperty>
-			<StyleProperty name="imagePackageCloseHeight" type="ImageSize" not_styleable="true" category="Appearance" default="16" groupRefId="ImagePackageCloseSize" groupOrder="2">
-				<StyleElement selector="img.opcua-object.collapsed" attribute="@include imageHeight($value)"/>
-				<StyleElement selector="svg.opcua-object.collapsed" attribute="@include imageHeight($value)"/>
-				<Description>height of the image for opcua package close</Description>
-			</StyleProperty>
-			<StyleProperty name="imagePackageCloseColor" category="Appearance" type="Color" default="#000000">
-				<StyleElement selector="&amp;:not(.active):not(.disabled) svg.opcua-object.collapsed" attribute="fill"/>
-				<Description>Color of the image for opcua package close - only apply if a SVG image is used</Description>
-			</StyleProperty>
-			<StyleProperty name="fontSize" category="Font" type="PixelVal" default="12px">
-				<StyleElement selector="span.opcua-name" attribute="font-size"/>
-				<Description>Fontsize of the text in pixel</Description>
-			</StyleProperty>
-			<StyleProperty name="fontName" category="Font" type="FontName" default="Arial">
-				<StyleElement selector="span.opcua-name" attribute="font-family"/>
-				<Description>Fontname of the text</Description>
-			</StyleProperty>
-			<StyleProperty name="textColor" category="Appearance" type="Color" default="#000000">
-				<StyleElement selector="span.opcua-name" attribute="color"/>
-				<Description>Sets the color of the text</Description>
-			</StyleProperty>
-			<StyleProperty name="bold" category="Font" type="Boolean" default="false">
-				<StyleElement selector="span.opcua-name" attribute="@include font-weight-bold($value)"/>
-				<Description>If *true* font style is bold</Description>
-			</StyleProperty>
-			<StyleProperty name="italic" category="Font" type="Boolean" default="false">
-				<StyleElement selector="span.opcua-name" attribute="@include font-style-italic($value)"/>
-				<Description>If *true* font style is italic</Description>
-			</StyleProperty>
-			<StyleProperty name="borderStyle" type="BorderStyle" category="Appearance" default="solid">
-				<StyleElement attribute="border-style"/>
-				<Description>Style of the Border of the widget</Description>
-			</StyleProperty>
-			<StyleProperty name="borderWidth" type="PixelValCollection" category="Appearance" default="2px">
-				<StyleElement attribute="border-width"/>
-				<Description>Sets the width of the border. For further information, please check its type</Description>
-			</StyleProperty>
-			<StyleProperty name="borderColor" category="Appearance" type="ColorCollection" default="#5B7C70">
-				<StyleElement attribute="border-color"/>
-				<Description>Sets the border color</Description>
-			</StyleProperty>
-			<StyleProperty name="selectedBackColor" category="Appearance" type="Color" default="#0078D7">
-				<StyleElement selector=".opcua-node.selected&gt;.opcua-node-container" attribute="background-color"/>
-				<Description>background color of the node selected</Description>
-			</StyleProperty>
-			<StyleProperty name="selectedTextColor" category="Appearance" type="Color" default="#FFFFFF">
-				<StyleElement selector=".opcua-node.selected&gt;.opcua-node-container&gt;span" attribute="color"/>
-				<Description>text color of the node selected</Description>
-			</StyleProperty>
-			<StyleProperty name="hoverBackColor" category="Appearance" type="Color" default="#E5F1fB">
-				<StyleElement selector=".opcua-node:hover:not(.selected)&gt;.opcua-node-container " attribute="background-color"/>
-				<Description>background color when hover a node not selected</Description>
-			</StyleProperty>
-		</StyleProperties>
-		<PropertyGroups>
-			<PropertyGroup name="Size" type="String" category="Layout">
-				<Description>outer height and width of widget</Description>
-			</PropertyGroup>
-			<PropertyGroup name="Position" type="String" category="Layout">
-				<Description>top and left of widget</Description>
-			</PropertyGroup>
-			<PropertyGroup name="ImageVariableSize" type="string" category="Appearance">
-				<Description>size of the image for opcua variable</Description>
-			</PropertyGroup>
-			<PropertyGroup name="ImageMethodSize" type="string" category="Appearance">
-				<Description>size of the image for opcua method</Description>
-			</PropertyGroup>
-			<PropertyGroup name="ImagePackageOpenSize" type="string" category="Appearance">
-				<Description>size of the image for opcua package open</Description>
-			</PropertyGroup>
-			<PropertyGroup name="ImagePackageCloseSize" type="string" category="Appearance">
-				<Description>size of the image for opcua package close</Description>
-			</PropertyGroup>
-		</PropertyGroups>
-	</Widget>
+	<BindingTemplates>
+  
+</BindingTemplates>
+<PropertyGroups>
+  <PropertyGroup name="Size" type="String" category="Layout">
+    <Description>outer height and width of widget</Description>
+  </PropertyGroup>
+  <PropertyGroup name="Position" type="String" category="Layout">
+    <Description>top and left of widget</Description>
+  </PropertyGroup>
+  <PropertyGroup name="ImageVariableSize" type="string" category="Appearance">
+    <Description>size of the image for opcua variable</Description>
+  </PropertyGroup>
+  <PropertyGroup name="ImageMethodSize" type="string" category="Appearance">
+    <Description>size of the image for opcua method</Description>
+  </PropertyGroup>
+  <PropertyGroup name="ImagePackageOpenSize" type="string" category="Appearance">
+    <Description>size of the image for opcua package open</Description>
+  </PropertyGroup>
+  <PropertyGroup name="ImagePackageCloseSize" type="string" category="Appearance">
+    <Description>size of the image for opcua package close</Description>
+  </PropertyGroup>
+</PropertyGroups>
+<StyleProperties defaultStyle="default">
+  <StyleProperty name="width" type="Size" not_styleable="true" owner="widgets.opcuacviewer.OpcUacBrowser" category="Layout" groupRefId="Size" groupOrder="1" default="100">
+    <StyleElement attribute="@include elemWidth($value)"/>
+    <Description>outer width of widget</Description>
+  </StyleProperty>
+  <StyleProperty name="height" type="Size" not_styleable="true" owner="widgets.opcuacviewer.OpcUacBrowser" category="Layout" groupRefId="Size" groupOrder="2" default="30">
+    <StyleElement attribute="@include elemHeight($value)"/>
+    <Description>outer height of widget</Description>
+  </StyleProperty>
+  <StyleProperty name="top" type="Integer" not_styleable="true" owner="brease.core.BaseWidget" category="Layout" groupRefId="Position" groupOrder="1">
+    <StyleElement attribute="@include elemTop($value)"/>
+    <Description>absolute position measured from top boundary of parent container</Description>
+  </StyleProperty>
+  <StyleProperty name="left" type="Integer" not_styleable="true" owner="brease.core.BaseWidget" category="Layout" groupRefId="Position" groupOrder="2">
+    <StyleElement attribute="@include elemLeft($value)"/>
+    <Description>absolute position measured from left boundary of parent container</Description>
+  </StyleProperty>
+  <StyleProperty name="zIndex" type="UInteger" not_styleable="true" owner="brease.core.BaseWidget" category="Layout" required="true">
+    <StyleElement attribute="z-index"/>
+    <Description>The zIndex property specifies the z-order of a widget and its childs.&lt;br/&gt;&#xD;
+        When widgets overlap, z-order determines which one covers the other. A widget with a larger zIndex generally covers a widget with a lower one.&lt;br/&gt;&#xD;
+        The zIndex must be unique within a content.&lt;br/&gt;</Description>
+  </StyleProperty>
+  <StyleProperty name="backColor" type="Color" category="Appearance" default="#FFDEAA">
+    <StyleElement attribute="background-color"/>
+    <Description>background color of the widget</Description>
+  </StyleProperty>
+  <StyleProperty name="imageVariableWidth" type="ImageSize" not_styleable="true" category="Appearance" default="16" groupRefId="ImageVariableSize" groupOrder="1">
+    <StyleElement selector="img.opcua-variable" attribute="@include imageWidth($value)"/>
+    <StyleElement selector="svg.opcua-variable" attribute="@include imageWidth($value)"/>
+    <Description>width of the image for opcua variable</Description>
+  </StyleProperty>
+  <StyleProperty name="imageVariableHeight" type="ImageSize" not_styleable="true" category="Appearance" default="16" groupRefId="ImageVariableSize" groupOrder="2">
+    <StyleElement selector="img.opcua-variable" attribute="@include imageHeight($value)"/>
+    <StyleElement selector="svg.opcua-variable" attribute="@include imageHeight($value)"/>
+    <Description>height of the image for opcua variable</Description>
+  </StyleProperty>
+  <StyleProperty name="imageVariableColor" category="Appearance" type="Color" default="#000000">
+    <StyleElement selector="&amp;:not(.active):not(.disabled) svg.opcua-variable" attribute="fill"/>
+    <Description>Color of the image for opcua variable - only apply if a SVG image is used</Description>
+  </StyleProperty>
+  <StyleProperty name="imageMethodWidth" type="ImageSize" not_styleable="true" category="Appearance" default="16" groupRefId="ImageMethodSize" groupOrder="1">
+    <StyleElement selector="img.opcua-method" attribute="@include imageWidth($value)"/>
+    <StyleElement selector="svg.opcua-method" attribute="@include imageWidth($value)"/>
+    <Description>width of the image for opcua method</Description>
+  </StyleProperty>
+  <StyleProperty name="imageMethodHeight" type="ImageSize" not_styleable="true" category="Appearance" default="16" groupRefId="ImageMethodSize" groupOrder="2">
+    <StyleElement selector="img.opcua-method" attribute="@include imageHeight($value)"/>
+    <StyleElement selector="svg.opcua-method" attribute="@include imageHeight($value)"/>
+    <Description>height of the image for opcua method</Description>
+  </StyleProperty>
+  <StyleProperty name="imageMethodColor" category="Appearance" type="Color" default="#000000">
+    <StyleElement selector="&amp;:not(.active):not(.disabled) svg.opcua-method" attribute="fill"/>
+    <Description>Color of the image for opcua method - only apply if a SVG image is used</Description>
+  </StyleProperty>
+  <StyleProperty name="imagePackageOpenWidth" type="ImageSize" not_styleable="true" category="Appearance" default="16" groupRefId="ImagePackageOpenSize" groupOrder="1">
+    <StyleElement selector="img.opcua-object.expanded" attribute="@include imageWidth($value)"/>
+    <StyleElement selector="svg.opcua-object.expanded" attribute="@include imageWidth($value)"/>
+    <Description>width of the image for opcua package open</Description>
+  </StyleProperty>
+  <StyleProperty name="imagePackageOpenHeight" type="ImageSize" not_styleable="true" category="Appearance" default="16" groupRefId="ImagePackageOpenSize" groupOrder="2">
+    <StyleElement selector="img.opcua-object.expanded" attribute="@include imageHeight($value)"/>
+    <StyleElement selector="svg.opcua-object.expanded" attribute="@include imageHeight($value)"/>
+    <Description>height of the image for opcua package open</Description>
+  </StyleProperty>
+  <StyleProperty name="imagePackageOpenColor" category="Appearance" type="Color" default="#000000">
+    <StyleElement selector="&amp;:not(.active):not(.disabled) svg.opcua-object.expanded" attribute="fill"/>
+    <Description>Color of the image for opcua package open - only apply if a SVG image is used</Description>
+  </StyleProperty>
+  <StyleProperty name="imagePackageCloseWidth" type="ImageSize" not_styleable="true" category="Appearance" default="16" groupRefId="ImagePackageCloseSize" groupOrder="1">
+    <StyleElement selector="img.opcua-object.collapsed" attribute="@include imageWidth($value)"/>
+    <StyleElement selector="svg.opcua-object.collapsed" attribute="@include imageWidth($value)"/>
+    <Description>width of the image for opcua package close</Description>
+  </StyleProperty>
+  <StyleProperty name="imagePackageCloseHeight" type="ImageSize" not_styleable="true" category="Appearance" default="16" groupRefId="ImagePackageCloseSize" groupOrder="2">
+    <StyleElement selector="img.opcua-object.collapsed" attribute="@include imageHeight($value)"/>
+    <StyleElement selector="svg.opcua-object.collapsed" attribute="@include imageHeight($value)"/>
+    <Description>height of the image for opcua package close</Description>
+  </StyleProperty>
+  <StyleProperty name="imagePackageCloseColor" category="Appearance" type="Color" default="#000000">
+    <StyleElement selector="&amp;:not(.active):not(.disabled) svg.opcua-object.collapsed" attribute="fill"/>
+    <Description>Color of the image for opcua package close - only apply if a SVG image is used</Description>
+  </StyleProperty>
+  <StyleProperty name="fontSize" category="Font" type="PixelVal" default="12px">
+    <StyleElement selector="span.opcua-name" attribute="font-size"/>
+    <Description>Fontsize of the text in pixel</Description>
+  </StyleProperty>
+  <StyleProperty name="fontName" category="Font" type="FontName" default="Arial">
+    <StyleElement selector="span.opcua-name" attribute="font-family"/>
+    <Description>Fontname of the text</Description>
+  </StyleProperty>
+  <StyleProperty name="textColor" category="Appearance" type="Color" default="#000000">
+    <StyleElement selector="span.opcua-name" attribute="color"/>
+    <Description>Sets the color of the text</Description>
+  </StyleProperty>
+  <StyleProperty name="bold" category="Font" type="Boolean" default="false">
+    <StyleElement selector="span.opcua-name" attribute="@include font-weight-bold($value)"/>
+    <Description>If *true* font style is bold</Description>
+  </StyleProperty>
+  <StyleProperty name="italic" category="Font" type="Boolean" default="false">
+    <StyleElement selector="span.opcua-name" attribute="@include font-style-italic($value)"/>
+    <Description>If *true* font style is italic</Description>
+  </StyleProperty>
+  <StyleProperty name="borderStyle" type="BorderStyle" category="Appearance" default="solid">
+    <StyleElement attribute="border-style"/>
+    <Description>Style of the Border of the widget</Description>
+  </StyleProperty>
+  <StyleProperty name="borderWidth" type="PixelValCollection" category="Appearance" default="2px">
+    <StyleElement attribute="border-width"/>
+    <Description>Sets the width of the border. For further information, please check its type</Description>
+  </StyleProperty>
+  <StyleProperty name="borderColor" category="Appearance" type="ColorCollection" default="#5B7C70">
+    <StyleElement attribute="border-color"/>
+    <Description>Sets the border color</Description>
+  </StyleProperty>
+  <StyleProperty name="selectedBackColor" category="Appearance" type="Color" default="#0078D7">
+    <StyleElement selector=".opcua-node.selected>.opcua-node-container" attribute="background-color"/>
+    <Description>background color of the node selected</Description>
+  </StyleProperty>
+  <StyleProperty name="selectedTextColor" category="Appearance" type="Color" default="#FFFFFF">
+    <StyleElement selector=".opcua-node.selected>.opcua-node-container>span" attribute="color"/>
+    <Description>text color of the node selected</Description>
+  </StyleProperty>
+  <StyleProperty name="hoverBackColor" category="Appearance" type="Color" default="#E5F1fB">
+    <StyleElement selector=".opcua-node:hover:not(.selected)>.opcua-node-container " attribute="background-color"/>
+    <Description>background color when hover a node not selected</Description>
+  </StyleProperty>
+</StyleProperties>
+</Widget>
 </WidgetLibrary>

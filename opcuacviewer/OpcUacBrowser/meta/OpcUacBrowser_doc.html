@@ -1,0 +1,588 @@
+<html lang="en">
+  <head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>widgets.opcuacviewer.OpcUacBrowser Documentation</title>
+	<link href="../../../../assets/css/bootstrap.min.css" rel="stylesheet">
+  </head>
+  <body>
+<div class="panel-heading"><h3>widgets.opcuacviewer.OpcUacBrowser</h3></div>
+<div class="panel panel-default">
+ <div class="panel-heading"><h3>Widget Description</h3></div>
+<table class="table table-bordered">
+<tbody>
+<tr>
+<td><strong>de: </strong>Opcua client browser</td>
+</tr>
+<tr>
+<td><strong>en: </strong>Opcua client browser</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="panel panel-default">
+ <div class="panel-heading"><h3>Properties</h3></div>
+<table class="table table-bordered">
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th>description</th>
+<th>bindable</th>
+<th>readOnly</th>
+<th>required</th>
+<th>defaultValue</th>
+<th>localizable</th>
+</tr>
+ </thead>
+<tbody>
+<tr>
+<td>enable</td>
+<td>Boolean</td>
+<td>Initial option to enable widget.
+</td>
+<td style="color:green;font-weight:bold;">true</td>
+<td>false</td>
+<td>false</td>
+<td>true</td>
+<td>false</td>
+</tr>
+<tr>
+<td>imageOpcuaMethod</td>
+<td>ImagePath</td>
+<td>Path to an optional image for opcua method.
+</td>
+<td style="color:green;font-weight:bold;">true</td>
+<td>false</td>
+<td>false</td>
+<td></td>
+<td>false</td>
+</tr>
+<tr>
+<td>imageOpcuaPackageClose</td>
+<td>ImagePath</td>
+<td>Path to an optional image for opcua package close.
+</td>
+<td style="color:green;font-weight:bold;">true</td>
+<td>false</td>
+<td>false</td>
+<td></td>
+<td>false</td>
+</tr>
+<tr>
+<td>imageOpcuaPackageOpen</td>
+<td>ImagePath</td>
+<td>Path to an optional image for opcua package open.
+</td>
+<td style="color:green;font-weight:bold;">true</td>
+<td>false</td>
+<td>false</td>
+<td></td>
+<td>false</td>
+</tr>
+<tr>
+<td>imageOpcuaVariable</td>
+<td>ImagePath</td>
+<td>Path to an optional image for opcua variable.
+</td>
+<td style="color:green;font-weight:bold;">true</td>
+<td>false</td>
+<td>false</td>
+<td></td>
+<td>false</td>
+</tr>
+<tr>
+<td>permissionOperate</td>
+<td>RoleCollection</td>
+<td>restricts operability to users, which have given roles
+</td>
+<td>false</td>
+<td>false</td>
+<td>false</td>
+<td></td>
+<td>false</td>
+</tr>
+<tr>
+<td>permissionView</td>
+<td>RoleCollection</td>
+<td>restricts visibility to users, which have given roles
+</td>
+<td>false</td>
+<td>false</td>
+<td>false</td>
+<td></td>
+<td>false</td>
+</tr>
+<tr>
+<td>selectedNodeId</td>
+<td>String</td>
+<td>Actual selected nodeId in the tree (eg. NS0|Numeric|85)
+</td>
+<td style="color:green;font-weight:bold;">true</td>
+<td>false</td>
+<td>false</td>
+<td></td>
+<td>false</td>
+</tr>
+<tr>
+<td>selectedNodeIdentifier</td>
+<td>String</td>
+<td>Actual selected nodeIdentifier in the tree (eg. 85)
+</td>
+<td style="color:green;font-weight:bold;">true</td>
+<td>false</td>
+<td>false</td>
+<td></td>
+<td>false</td>
+</tr>
+<tr>
+<td>selectedNodeIdentifierType</td>
+<td>Integer</td>
+<td>Actual selected nodeIdentifierType in the tree (eg. 0=Numeric, 1=String, 2=Guid, 3=Opaque)
+</td>
+<td style="color:green;font-weight:bold;">true</td>
+<td>false</td>
+<td>false</td>
+<td>0</td>
+<td>false</td>
+</tr>
+<tr>
+<td>selectedNodeNamespaceIndex</td>
+<td>Integer</td>
+<td>Actual selected nodeNamespaceIndex in the tree (eg. 0)
+</td>
+<td style="color:green;font-weight:bold;">true</td>
+<td>false</td>
+<td>false</td>
+<td>0</td>
+<td>false</td>
+</tr>
+<tr>
+<td>serverAlias</td>
+<td>String</td>
+<td>Server alias of the server opcua you want to explore.
+If empty, the default server will be used.
+</td>
+<td>false</td>
+<td>false</td>
+<td>false</td>
+<td></td>
+<td>false</td>
+</tr>
+<tr>
+<td>style</td>
+<td>StyleReference</td>
+<td>reference to a style for this widget type
+</td>
+<td style="color:green;font-weight:bold;">true</td>
+<td>false</td>
+<td>false</td>
+<td>default</td>
+<td>false</td>
+</tr>
+<tr>
+<td>tabIndex</td>
+<td>Integer</td>
+<td>sets if a widget should have autofocus enabled (0), the order of the focus (>0),
+or if autofocus should be disabled (-1)
+</td>
+<td>false</td>
+<td>false</td>
+<td>false</td>
+<td>-1</td>
+<td>false</td>
+</tr>
+<tr>
+<td>tooltip</td>
+<td>String</td>
+<td>reference to a tooltip for a widget
+</td>
+<td>false</td>
+<td>false</td>
+<td>false</td>
+<td></td>
+<td style="color:green;font-weight:bold;">true</td>
+</tr>
+<tr>
+<td>useSVGStyling</td>
+<td>Boolean</td>
+<td>Define if the image stylings (i.e imageColor) are applied - only valid when SVG Images are used.
+</td>
+<td>false</td>
+<td>false</td>
+<td>false</td>
+<td>true</td>
+<td>false</td>
+</tr>
+<tr>
+<td>visible</td>
+<td>Boolean</td>
+<td>change visibility
+</td>
+<td style="color:green;font-weight:bold;">true</td>
+<td>false</td>
+<td>false</td>
+<td>true</td>
+<td>false</td>
+</tr>
+<tr>
+<td>imagePackageCloseHeight</td>
+<td>ImageSize</td>
+<td>height of the image for opcua package close</td>
+<td>false</td>
+<td>false</td>
+<td>false</td>
+<td>16</td>
+<td>false</td>
+</tr>
+<tr>
+<td>imagePackageCloseWidth</td>
+<td>ImageSize</td>
+<td>width of the image for opcua package close</td>
+<td>false</td>
+<td>false</td>
+<td>false</td>
+<td>16</td>
+<td>false</td>
+</tr>
+<tr>
+<td>imagePackageOpenHeight</td>
+<td>ImageSize</td>
+<td>height of the image for opcua package open</td>
+<td>false</td>
+<td>false</td>
+<td>false</td>
+<td>16</td>
+<td>false</td>
+</tr>
+<tr>
+<td>imagePackageOpenWidth</td>
+<td>ImageSize</td>
+<td>width of the image for opcua package open</td>
+<td>false</td>
+<td>false</td>
+<td>false</td>
+<td>16</td>
+<td>false</td>
+</tr>
+<tr>
+<td>imageMethodHeight</td>
+<td>ImageSize</td>
+<td>height of the image for opcua method</td>
+<td>false</td>
+<td>false</td>
+<td>false</td>
+<td>16</td>
+<td>false</td>
+</tr>
+<tr>
+<td>imageMethodWidth</td>
+<td>ImageSize</td>
+<td>width of the image for opcua method</td>
+<td>false</td>
+<td>false</td>
+<td>false</td>
+<td>16</td>
+<td>false</td>
+</tr>
+<tr>
+<td>imageVariableHeight</td>
+<td>ImageSize</td>
+<td>height of the image for opcua variable</td>
+<td>false</td>
+<td>false</td>
+<td>false</td>
+<td>16</td>
+<td>false</td>
+</tr>
+<tr>
+<td>imageVariableWidth</td>
+<td>ImageSize</td>
+<td>width of the image for opcua variable</td>
+<td>false</td>
+<td>false</td>
+<td>false</td>
+<td>16</td>
+<td>false</td>
+</tr>
+<tr>
+<td>zIndex</td>
+<td>UInteger</td>
+<td>The zIndex property specifies the z-order of a widget and its childs.<br/>
+        When widgets overlap, z-order determines which one covers the other. A widget with a larger zIndex generally covers a widget with a lower one.<br/>
+        The zIndex must be unique within a content.<br/></td>
+<td>false</td>
+<td>false</td>
+<td>true</td>
+<td></td>
+<td>false</td>
+</tr>
+<tr>
+<td>left</td>
+<td>Integer</td>
+<td>absolute position measured from left boundary of parent container</td>
+<td>false</td>
+<td>false</td>
+<td>false</td>
+<td></td>
+<td>false</td>
+</tr>
+<tr>
+<td>top</td>
+<td>Integer</td>
+<td>absolute position measured from top boundary of parent container</td>
+<td>false</td>
+<td>false</td>
+<td>false</td>
+<td></td>
+<td>false</td>
+</tr>
+<tr>
+<td>height</td>
+<td>Size</td>
+<td>outer height of widget</td>
+<td>false</td>
+<td>false</td>
+<td>false</td>
+<td>30</td>
+<td>false</td>
+</tr>
+<tr>
+<td>width</td>
+<td>Size</td>
+<td>outer width of widget</td>
+<td>false</td>
+<td>false</td>
+<td>false</td>
+<td>100</td>
+<td>false</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="panel panel-default">
+ <div class="panel-heading"><h3>Styleable Properties</h3></div>
+<table class="table table-bordered">
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th>description</th>
+<th>defaultValue</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>width</td>
+<td>Size</td>
+<td><p>outer width of widget</p>
+</td>
+<td>100</td>
+</tr>
+<tr>
+<td>height</td>
+<td>Size</td>
+<td><p>outer height of widget</p>
+</td>
+<td>30</td>
+</tr>
+<tr>
+<td>top</td>
+<td>Integer</td>
+<td><p>absolute position measured from top boundary of parent container</p>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>left</td>
+<td>Integer</td>
+<td><p>absolute position measured from left boundary of parent container</p>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>zIndex</td>
+<td>UInteger</td>
+<td><p>The zIndex property specifies the z-order of a widget and its childs.&lt;br/&gt;
+When widgets overlap, z-order determines which one covers the other. A widget with a larger zIndex generally covers a widget with a lower one.&lt;br/&gt;
+The zIndex must be unique within a content.&lt;br/&gt;</p>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>backColor</td>
+<td>Color</td>
+<td><p>background color of the widget</p>
+</td>
+<td style="background-color:#FFDEAA;color:black;">#FFDEAA</td>
+</tr>
+<tr>
+<td>imageVariableWidth</td>
+<td>ImageSize</td>
+<td><p>width of the image for opcua variable</p>
+</td>
+<td>16</td>
+</tr>
+<tr>
+<td>imageVariableHeight</td>
+<td>ImageSize</td>
+<td><p>height of the image for opcua variable</p>
+</td>
+<td>16</td>
+</tr>
+<tr>
+<td>imageVariableColor</td>
+<td>Color</td>
+<td><p>Color of the image for opcua variable - only apply if a SVG image is used</p>
+</td>
+<td style="background-color:#000000;color:white;">#000000</td>
+</tr>
+<tr>
+<td>imageMethodWidth</td>
+<td>ImageSize</td>
+<td><p>width of the image for opcua method</p>
+</td>
+<td>16</td>
+</tr>
+<tr>
+<td>imageMethodHeight</td>
+<td>ImageSize</td>
+<td><p>height of the image for opcua method</p>
+</td>
+<td>16</td>
+</tr>
+<tr>
+<td>imageMethodColor</td>
+<td>Color</td>
+<td><p>Color of the image for opcua method - only apply if a SVG image is used</p>
+</td>
+<td style="background-color:#000000;color:white;">#000000</td>
+</tr>
+<tr>
+<td>imagePackageOpenWidth</td>
+<td>ImageSize</td>
+<td><p>width of the image for opcua package open</p>
+</td>
+<td>16</td>
+</tr>
+<tr>
+<td>imagePackageOpenHeight</td>
+<td>ImageSize</td>
+<td><p>height of the image for opcua package open</p>
+</td>
+<td>16</td>
+</tr>
+<tr>
+<td>imagePackageOpenColor</td>
+<td>Color</td>
+<td><p>Color of the image for opcua package open - only apply if a SVG image is used</p>
+</td>
+<td style="background-color:#000000;color:white;">#000000</td>
+</tr>
+<tr>
+<td>imagePackageCloseWidth</td>
+<td>ImageSize</td>
+<td><p>width of the image for opcua package close</p>
+</td>
+<td>16</td>
+</tr>
+<tr>
+<td>imagePackageCloseHeight</td>
+<td>ImageSize</td>
+<td><p>height of the image for opcua package close</p>
+</td>
+<td>16</td>
+</tr>
+<tr>
+<td>imagePackageCloseColor</td>
+<td>Color</td>
+<td><p>Color of the image for opcua package close - only apply if a SVG image is used</p>
+</td>
+<td style="background-color:#000000;color:white;">#000000</td>
+</tr>
+<tr>
+<td>fontSize</td>
+<td>PixelVal</td>
+<td><p>Fontsize of the text in pixel</p>
+</td>
+<td>12px</td>
+</tr>
+<tr>
+<td>fontName</td>
+<td>FontName</td>
+<td><p>Fontname of the text</p>
+</td>
+<td>Arial</td>
+</tr>
+<tr>
+<td>textColor</td>
+<td>Color</td>
+<td><p>Sets the color of the text</p>
+</td>
+<td style="background-color:#000000;color:white;">#000000</td>
+</tr>
+<tr>
+<td>bold</td>
+<td>Boolean</td>
+<td><p>If <em>true</em> font style is bold</p>
+</td>
+<td>false</td>
+</tr>
+<tr>
+<td>italic</td>
+<td>Boolean</td>
+<td><p>If <em>true</em> font style is italic</p>
+</td>
+<td>false</td>
+</tr>
+<tr>
+<td>borderStyle</td>
+<td>BorderStyle</td>
+<td><p>Style of the Border of the widget</p>
+</td>
+<td>solid</td>
+</tr>
+<tr>
+<td>borderWidth</td>
+<td>PixelValCollection</td>
+<td><p>Sets the width of the border. For further information, please check its type</p>
+</td>
+<td>2px</td>
+</tr>
+<tr>
+<td>borderColor</td>
+<td>ColorCollection</td>
+<td><p>Sets the border color</p>
+</td>
+<td>#5B7C70</td>
+</tr>
+<tr>
+<td>selectedBackColor</td>
+<td>Color</td>
+<td><p>background color of the node selected</p>
+</td>
+<td style="background-color:#0078D7;color:white;">#0078D7</td>
+</tr>
+<tr>
+<td>selectedTextColor</td>
+<td>Color</td>
+<td><p>text color of the node selected</p>
+</td>
+<td style="background-color:#FFFFFF;color:black;">#FFFFFF</td>
+</tr>
+<tr>
+<td>hoverBackColor</td>
+<td>Color</td>
+<td><p>background color when hover a node not selected</p>
+</td>
+<td style="background-color:#E5F1fB;color:black;">#E5F1fB</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+ <script src="../../../../jquery.js"></script>
+ <script src="../../../../assets/js/bootstrap.min.js"></script>
+</body>
+</html>

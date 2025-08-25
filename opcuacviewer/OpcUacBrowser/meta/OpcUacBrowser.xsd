@@ -3,7 +3,6 @@
 <xs:complexType name="widgets.opcuacviewer.OpcUacBrowserRestrict" abstract="true">
 	<xs:complexContent>
 		<xs:restriction base="iat:brease.core.BaseContentWidget">
-			<xs:attribute name="tabIndex" use="optional" type="types:Integer" default="-1" />
 			<xs:attribute name="height" use="optional" type="types:Size" default="30" />
 			<xs:attribute name="width" use="optional" type="types:Size" default="100" />
 		</xs:restriction>
@@ -16,6 +15,10 @@
 			<xs:attribute name="imageOpcuaPackageClose" use="optional" type="types:ImagePath" default="" />
 			<xs:attribute name="imageOpcuaPackageOpen" use="optional" type="types:ImagePath" default="" />
 			<xs:attribute name="imageOpcuaVariable" use="optional" type="types:ImagePath" default="" />
+			<xs:attribute name="selectedNodeId" use="prohibited" type="types:String" />
+			<xs:attribute name="selectedNodeIdentifier" use="prohibited" type="types:String" />
+			<xs:attribute name="selectedNodeIdentifierType" use="prohibited" type="types:Integer" />
+			<xs:attribute name="selectedNodeNamespaceIndex" use="prohibited" type="types:Integer" />
 			<xs:attribute name="serverAlias" use="optional" type="types:String" default="" />
 			<xs:attribute name="useSVGStyling" use="optional" type="types:Boolean" default="true" />
 			<xs:attribute name="imagePackageCloseHeight" use="optional" type="types:ImageSize" default="16" />
