@@ -431,17 +431,18 @@ define([
             .attr("id", 'node_'+nodeId);
 
         // Setup interaction based on node type
-        if (node.nodeClass === 1) {
+        if (node.nodeClass === 1 || node.nodeClass === 2) {
             li.append($('<ul style="display:none;"></ul>'));
             [imgIcon, svgIcon, name].forEach(function(el) {
                 el.on("click", function(e) {
                     e.stopPropagation();
+                    if (node.nodeClass === 2) widget._onNodeClick(node);
                     widget._toggleNode(li, node);
                     widget._fireNodeClicked(node);
                     widget._changeClassSelected(li);
                 });
             });
-        } else if (node.nodeClass === 2 || node.nodeClass === 4) {
+        } else if (node.nodeClass === 4) {
             [imgIcon, svgIcon, name].forEach(function(el) {
                 el.on("click", function() {
                     widget._onNodeClick(node);
