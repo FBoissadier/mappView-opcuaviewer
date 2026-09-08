@@ -421,17 +421,18 @@ define(["widgets/opcuacviewer/common/libs/wfUtils/UtilsImage", "widgets/opcuacvi
             .attr("id", `node_${nodeId}`);
 
         // Setup interaction based on node type
-        if (node.nodeClass === 1) {
+        if (node.nodeClass === 1 || node.nodeClass === 2) {
             li.append($('<ul style="display:none;"></ul>'));
             [imgIcon, svgIcon, name].forEach((el) =>
                 el.on("click", (e) => {
                     e.stopPropagation();
+                    if (node.nodeClass === 2) this._onNodeClick(node);
                     this._toggleNode(li, node);
                     this._fireNodeClicked(node);
                     this._changeClassSelected(li);
                 })
             );
-        } else if (node.nodeClass === 2 || node.nodeClass === 4) {
+        } else if (node.nodeClass === 4) {
             [imgIcon, svgIcon, name].forEach((el) =>
                 el.on("click", () => {
                     this._onNodeClick(node);
